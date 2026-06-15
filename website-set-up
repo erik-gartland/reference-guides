@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Website Setup Guide — erikgartland.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ed;
+    --cream-2: #ede8df;
+    --cream-3: #e2ddd5;
+    --grey-box: #f0f0f2;
+    --grey-chip: #e4e4e8;
+    --grey-border: #dcdce0;
+    --white: #ffffff;
+    --charcoal: #2a2f2e;
+    --charcoal-mid: #4a5250;
+    --charcoal-light: #8a9896;
+    --seafoam: #4caf8a;
+    --seafoam-300: #70c9a8;
+    --seafoam-500: #2d9e72;
+    --seafoam-600: #1e845d;
+    --seafoam-xl: #d0f0e3;
+    --steel: #4a7fa5;
+    --steel-500: #376690;
+    --coral: #e8735a;
+    --coral-500: #d05a40;
+
+    --f-display: 'Lora', serif;
+    --f-body: 'Figtree', sans-serif;
+    --f-mono: 'Fira Code', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--f-body);
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 264px;
+    background: var(--cream);
+    border-right: 1px solid var(--cream-3);
+    overflow-y: auto;
+    padding: 28px 0;
+    z-index: 100;
+  }
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--seafoam-300);
+  }
+  .sidebar-logo {
+    padding: 4px 26px 22px;
+    border-bottom: 1px solid var(--cream-2);
+    margin-bottom: 18px;
+  }
+  .sidebar-logo .logo-text {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--seafoam);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .sidebar-logo .logo-sub {
+    font-family: var(--f-display);
+    font-size: 15px;
+    color: var(--charcoal);
+    margin-top: 8px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .nav-section {
+    padding: 10px 26px 6px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+    font-weight: 500;
+  }
+  .nav-link {
+    display: flex;
+    gap: 10px;
+    padding: 7px 26px;
+    color: var(--charcoal-mid);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-link .nav-num {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--seafoam-500);
+    flex-shrink: 0;
+  }
+  .nav-link:hover {
+    color: var(--charcoal);
+    background: var(--seafoam-xl);
+    border-left-color: var(--seafoam-300);
+  }
+  .nav-link.active {
+    color: var(--seafoam-600);
+    border-left-color: var(--seafoam-500);
+    background: var(--seafoam-xl);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    margin-left: 264px;
+    max-width: 820px;
+    padding: 64px 60px 80px;
+  }
+
+  .page-header {
+    margin-bottom: 12px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--cream-3);
+  }
+  .page-header .badge {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--seafoam);
+    background: var(--seafoam-xl);
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--f-display);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .page-header p {
+    color: var(--charcoal-mid);
+    font-size: 16px;
+    max-width: 620px;
+  }
+
+  /* ── STEPS ── */
+  .step {
+    padding: 44px 0;
+    border-bottom: 1px solid var(--cream-3);
+    scroll-margin-top: 24px;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .step-num {
+    font-family: var(--f-mono);
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: var(--seafoam-500);
+  }
+  .step-title {
+    font-family: var(--f-display);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.2;
+  }
+  .step-intro {
+    font-family: var(--f-body);
+    font-size: 15px;
+    color: var(--charcoal-mid);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  .step h3 {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--charcoal-light);
+    margin: 26px 0 10px;
+  }
+  .step p {
+    font-family: var(--f-body);
+    font-size: 15px;
+    color: var(--charcoal-mid);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  .step ol, .step ul { margin: 0 0 16px; padding-left: 22px; }
+  .step li {
+    font-family: var(--f-body);
+    font-size: 15px;
+    color: var(--charcoal-mid);
+    line-height: 1.75;
+    margin-bottom: 6px;
+  }
+  .step a { color: var(--seafoam-500); text-decoration: none; }
+  .step a:hover { text-decoration: underline; }
+  .step strong { color: var(--charcoal); font-weight: 600; }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    background: var(--grey-chip);
+    color: var(--charcoal);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  pre {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    background: var(--grey-box);
+    color: var(--charcoal);
+    padding: 16px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--steel-500);
+    overflow-x: auto;
+    margin-bottom: 16px;
+    line-height: 1.6;
+    position: relative;
+  }
+  pre code { background: none; padding: 0; }
+
+  /* copy button (matches Ubuntu guide) */
+  .copy-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--white);
+    border: 1px solid var(--cream-3);
+    border-radius: 6px;
+    color: var(--charcoal-light);
+    padding: 3px 8px 3px 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    pointer-events: none;
+    font-family: var(--f-body);
+    font-size: 12px;
+  }
+  pre:hover .copy-btn { opacity: 1; pointer-events: all; }
+  .copy-btn:hover {
+    background: var(--white);
+    border-color: var(--seafoam-300);
+    color: var(--charcoal);
+  }
+  .copy-btn.copied { color: var(--seafoam-600); border-color: var(--seafoam-500); }
+  .copy-btn svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* callouts */
+  .note {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--seafoam-300);
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .note-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--seafoam);
+    margin-bottom: 6px;
+  }
+  .note p { font-size: 14px; margin-bottom: 0; }
+  .tip {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--coral);
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin: 18px 0;
+  }
+  .tip-label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral-500);
+    margin-bottom: 6px;
+  }
+  .tip p { font-size: 14px; margin-bottom: 0; }
+
+  /* footer */
+  footer {
+    margin-left: 264px;
+    border-top: 1px solid var(--cream-3);
+    padding: 28px 60px;
+    background: var(--grey-box);
+  }
+  .footer-inner {
+    max-width: 820px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-name {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+  }
+
+  /* mobile toggle */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 200;
+    background: var(--white);
+    border: 1px solid var(--cream-3);
+    border-radius: 8px;
+    width: 42px; height: 42px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    content: '';
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--charcoal);
+    position: relative;
+    transition: 0.2s;
+  }
+  .menu-toggle span::before { position: absolute; top: -6px; }
+  .menu-toggle span::after { position: absolute; top: 6px; }
+
+  @media (max-width: 820px) {
+    .menu-toggle { display: flex; }
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      box-shadow: 0 0 40px rgba(42,47,46,0.12);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 72px 24px 56px; }
+    .page-header h1 { font-size: 30px; }
+    footer { margin-left: 0; padding: 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main, footer { margin-left: 0; }
+    .copy-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span></button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">Reference Guide</div>
+    <div class="logo-sub">Building a Personal Website</div>
+  </div>
+  <div class="nav-section">Contents</div>
+  <a class="nav-link" href="#step-1"><span class="nav-num">1</span> Set up the GitHub repository</a>
+  <a class="nav-link" href="#step-2"><span class="nav-num">2</span> Enable GitHub Pages</a>
+  <a class="nav-link" href="#step-3"><span class="nav-num">3</span> Connect a custom domain</a>
+  <a class="nav-link" href="#step-4"><span class="nav-num">4</span> Remove .html from URLs</a>
+  <a class="nav-link" href="#step-5"><span class="nav-num">5</span> Build a design system</a>
+  <a class="nav-link" href="#step-6"><span class="nav-num">6</span> Make it mobile-friendly</a>
+  <a class="nav-link" href="#step-7"><span class="nav-num">7</span> Set up SEO</a>
+  <a class="nav-link" href="#step-8"><span class="nav-num">8</span> Add a favicon</a>
+  <a class="nav-link" href="#step-9"><span class="nav-num">9</span> Make ongoing edits</a>
+</nav>
+
+<main class="main">
+
+  <div class="page-header">
+    <span class="badge">Reference Guide</span>
+    <h1>Building a Personal Website on GitHub Pages</h1>
+    <p>A step-by-step record of how erikgartland.com was set up — from an empty repository to a mobile-friendly, search-indexed site on a custom domain.</p>
+  </div>
+
+  <section class="step" id="step-1">
+    <div class="step-header">
+      <span class="step-num">1</span>
+      <h2 class="step-title">Set up the GitHub repository</h2>
+    </div>
+    <p class="step-intro">GitHub Pages serves a website directly from a repository, for free. The repository name determines your default web address.</p>
+
+    <ol>
+      <li>Create a new repository named <code>username.github.io</code> (for this site, <code>erik-gartland.github.io</code>). The name must match your GitHub username exactly.</li>
+      <li>Make the repository public — GitHub Pages won't serve private repos on the free tier.</li>
+      <li>Add an <code>index.html</code> file at the root. This becomes your homepage.</li>
+    </ol>
+
+    <div class="note">
+      <p class="note-label">Why this name</p>
+      <p>When a repo is named <code>username.github.io</code>, GitHub treats it as your primary user site and serves it at that address automatically, rather than as a sub-path like <code>username.github.io/project</code>.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-2">
+    <div class="step-header">
+      <span class="step-num">2</span>
+      <h2 class="step-title">Enable GitHub Pages</h2>
+    </div>
+    <p class="step-intro">Once the repo has content, point GitHub Pages at the branch you want to publish.</p>
+
+    <ol>
+      <li>Go to the repository's <strong>Settings → Pages</strong>.</li>
+      <li>Under <strong>Source</strong>, choose <strong>Deploy from a branch</strong>.</li>
+      <li>Select the <code>main</code> branch and the <code>/ (root)</code> folder, then save.</li>
+      <li>Wait a minute or two — GitHub builds the site and shows a live link at the top of the Pages settings.</li>
+    </ol>
+
+    <p>From here on, every time you push a change to <code>main</code>, the live site rebuilds automatically.</p>
+  </section>
+
+  <section class="step" id="step-3">
+    <div class="step-header">
+      <span class="step-num">3</span>
+      <h2 class="step-title">Connect a custom domain</h2>
+    </div>
+    <p class="step-intro">A custom domain (erikgartland.com) replaces the default <code>github.io</code> address. This involves two sides: telling your domain registrar where to point, and telling GitHub which domain to expect.</p>
+
+    <h3>On the registrar (Namecheap)</h3>
+    <p>Add DNS records pointing your domain to GitHub's servers. For an apex domain (no <code>www</code>), add four <strong>A records</strong> pointing to GitHub's IP addresses:</p>
+    <pre><code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153</code></pre>
+    <p>Then add a <strong>CNAME record</strong> for the <code>www</code> subdomain pointing to <code>username.github.io</code>.</p>
+
+    <h3>On GitHub</h3>
+    <ol>
+      <li>In <strong>Settings → Pages → Custom domain</strong>, enter <code>erikgartland.com</code> and save. This creates a <code>CNAME</code> file in your repo.</li>
+      <li>Once DNS propagates (can take up to a few hours), check <strong>Enforce HTTPS</strong> so the site loads securely.</li>
+    </ol>
+
+    <div class="tip">
+      <p class="tip-label">Heads up</p>
+      <p>DNS changes are not instant. If the domain doesn't connect right away, give it a few hours before troubleshooting — propagation delay is the usual culprit, not a misconfiguration.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-4">
+    <div class="step-header">
+      <span class="step-num">4</span>
+      <h2 class="step-title">Remove .html from URLs</h2>
+    </div>
+    <p class="step-intro">Clean URLs like <code>/research/</code> read better and are easier to share than <code>/research.html</code>. The trick is to use folders with index files.</p>
+
+    <p>Instead of a flat file like <code>research.html</code>, create a folder named <code>research/</code> containing a single <code>index.html</code>. A web server automatically serves <code>index.html</code> when someone visits the folder, so <code>/research/</code> just works.</p>
+
+    <pre><code>research/index.html   →  served at  /research/
+about/index.html      →  served at  /about/
+cv/index.html         →  served at  /cv/
+media/index.html      →  served at  /media/</code></pre>
+
+    <h3>Audit your internal links</h3>
+    <p>After restructuring, update every internal link to use the clean path (<code>href="/research/"</code> rather than <code>href="research.html"</code>). A single missed link can break navigation or send visitors to a dead page, so check the nav bar on every page.</p>
+
+    <div class="tip">
+      <p class="tip-label">Watch out</p>
+      <p>If old <code>.html</code> URLs were already indexed by search engines, they'll now 404. Step 07 covers how to redirect them and clear them from search results.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-5">
+    <div class="step-header">
+      <span class="step-num">5</span>
+      <h2 class="step-title">Build a design system</h2>
+    </div>
+    <p class="step-intro">A small, consistent set of colors and fonts — defined once and reused everywhere — keeps every page feeling like part of the same site.</p>
+
+    <h3>Define tokens as CSS variables</h3>
+    <p>Declaring colors and fonts as variables in <code>:root</code> means a single change updates the whole page. This site's palette:</p>
+    <ul>
+      <li><strong>Seafoam green</strong> — primary accent</li>
+      <li><strong>Steel blue</strong> — secondary</li>
+      <li><strong>Soft coral</strong> — highlight accent</li>
+      <li><strong>Cream &amp; charcoal</strong> — neutral background and text</li>
+    </ul>
+    <p>And three typefaces, each with a job: <strong>Lora</strong> for display headings, <strong>Figtree</strong> for body text, and <strong>Fira Code</strong> for labels and small-caps detail.</p>
+
+    <pre><code>:root {
+  --seafoam-500: #2d9e72;
+  --charcoal: #2a2f2e;
+  --cream: #f7f3ed;
+  --f-display: 'Lora', serif;
+  --f-body: 'Figtree', sans-serif;
+  --f-mono: 'Fira Code', monospace;
+}</code></pre>
+
+    <div class="note">
+      <p class="note-label">Structural language</p>
+      <p>Beyond color and type, consistency comes from repeated structural devices: a mono-font eyebrow above each section title, hairline dividers between entries, and small uppercase labels. These cues are reused on every page so the site reads as one coherent whole.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-6">
+    <div class="step-header">
+      <span class="step-num">6</span>
+      <h2 class="step-title">Make it mobile-friendly</h2>
+    </div>
+    <p class="step-intro">Most visitors arrive on phones. A handful of CSS media queries adapt the desktop layout to narrow screens without maintaining a separate mobile site.</p>
+
+    <h3>The viewport meta tag</h3>
+    <p>Every page needs this in the <code>&lt;head&gt;</code> so mobile browsers render at the correct scale:</p>
+    <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+    <h3>Media queries for the breakpoint</h3>
+    <p>Wrap mobile-specific rules in a media query. Below 680px wide, this site:</p>
+    <ul>
+      <li>Collapses multi-column grids (research areas, skills) to a single column</li>
+      <li>Reduces section padding so content isn't lost to whitespace</li>
+      <li>Stacks the hero headshot above the text, centered</li>
+      <li>Stretches buttons to full width for easier tapping</li>
+    </ul>
+
+    <h3>A hamburger menu for navigation</h3>
+    <p>When the nav links don't fit across a phone screen, they're hidden and replaced by a hamburger button that toggles a dropdown. The button is hidden on desktop and only appears below the breakpoint:</p>
+    <pre><code>@media (max-width: 680px) {
+  .nav-hamburger { display: flex; }
+  .nav-links { display: none; }
+}</code></pre>
+
+    <div class="tip">
+      <p class="tip-label">Test as you go</p>
+      <p>Resize your browser window narrow, or use your browser's device-preview mode, to catch layout issues before publishing. What looks fine at desktop width can crowd or overflow on a phone.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-7">
+    <div class="step-header">
+      <span class="step-num">7</span>
+      <h2 class="step-title">Set up SEO</h2>
+    </div>
+    <p class="step-intro">Search engine optimization helps people find the site and ensures search results point to the right, current URLs.</p>
+
+    <h3>Per-page metadata</h3>
+    <p>Each page should have a unique <code>&lt;title&gt;</code>, a <code>meta description</code>, a <code>canonical</code> link, and Open Graph tags so links preview nicely when shared. Structured data (JSON-LD) can further describe who you are to search engines.</p>
+
+    <h3>Sitemap and robots</h3>
+    <p>A <code>sitemap.xml</code> at the root lists every canonical URL so search engines know exactly what to index. A <code>robots.txt</code> tells crawlers they're welcome and points them to the sitemap. Submit the sitemap in Google Search Console to speed up discovery.</p>
+
+    <h3>Handling old URLs after a restructure</h3>
+    <p>When clean URLs (Step 04) made the old <code>.html</code> paths return 404s, two things cleared them from search results:</p>
+    <ol>
+      <li><strong>In Google Search Console:</strong> use the <em>Removals</em> tool to suppress each old URL, then <em>URL Inspection → Request Indexing</em> on each correct new URL.</li>
+      <li><strong>A redirecting 404 page:</strong> a custom <code>404.html</code> at the root with a small script that catches known old paths and forwards them to the new location — a safety net for anyone with an old bookmark.</li>
+    </ol>
+    <pre><code>const redirects = {
+  '/research.html': '/research/',
+  '/about.html':    '/about/',
+  '/cv.html':       '/cv/'
+};
+const path = window.location.pathname;
+if (redirects[path]) {
+  window.location.replace(redirects[path]);
+}</code></pre>
+
+    <div class="note">
+      <p class="note-label">Be patient</p>
+      <p>Search engines recrawl on their own schedule. Even after everything is correct, it can take days to weeks for old results to drop and new ones to settle in.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-8">
+    <div class="step-header">
+      <span class="step-num">8</span>
+      <h2 class="step-title">Add a favicon</h2>
+    </div>
+    <p class="step-intro">The favicon is the little icon in browser tabs and next to search results. Google is particular about how it's served.</p>
+
+    <p>A favicon can be embedded directly in HTML as a base64 data URI, but <strong>Google won't reliably display base64 favicons in search results</strong>. The fix is to serve it as a standalone file:</p>
+
+    <ol>
+      <li>Save the icon as <code>favicon.png</code> at the root of the repo.</li>
+      <li>Reference it in every page's <code>&lt;head&gt;</code>:</li>
+    </ol>
+    <pre><code>&lt;link rel="icon" type="image/png" href="/favicon.png"&gt;</code></pre>
+    <p>Verify it's reachable by visiting <code>yourdomain.com/favicon.png</code> directly. Once Google can fetch it there, it'll appear in results on the next crawl.</p>
+
+    <div class="note">
+      <p class="note-label">On base64 data URIs</p>
+      <p>A data URI embeds a file's binary content as a long text string right in the HTML, avoiding a separate network request. Handy for tiny assets, but search engines treat a real, fetchable file more reliably — which is why the favicon lives as its own file.</p>
+    </div>
+  </section>
+
+  <section class="step" id="step-9">
+    <div class="step-header">
+      <span class="step-num">9</span>
+      <h2 class="step-title">Make ongoing edits</h2>
+    </div>
+    <p class="step-intro">Day-to-day changes don't require any local tooling — GitHub's web editor is enough.</p>
+
+    <ol>
+      <li>Navigate to the file you want to change in the GitHub repo.</li>
+      <li>Click the pencil icon to edit in the browser.</li>
+      <li>Paste in the updated content and commit. The live site rebuilds within a minute or two.</li>
+    </ol>
+
+    <h3>A few hard-won lessons</h3>
+    <ul>
+      <li><strong>Hover and color effects can silently fail</strong> when a CSS rule is missing a matching <code>:hover</code> or <code>transition</code> on the right class. The fix is usually at the class level, not the element.</li>
+      <li><strong>Browser caching can mask changes.</strong> If an update doesn't appear, hard-refresh (<code>Cmd/Ctrl + Shift + R</code>) or append <code>?v=2</code> to the URL to bypass the cache.</li>
+      <li><strong>Restructuring URLs means auditing every link.</strong> One overlooked <code>href</code> can quietly break navigation.</li>
+    </ul>
+
+    <div class="tip">
+      <p class="tip-label">Keep documents in sync</p>
+      <p>If the site links to a downloadable resume or CV PDF, remember those are separate files. Updating a link on the site doesn't change the PDF — re-export and re-upload it separately when its contents change.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Website Setup Guide · erikgartland.com</span>
+    <span class="footer-name">Updated June 2026</span>
+  </div>
+</footer>
+
+<script>
+  // Copy buttons on code blocks
+  document.querySelectorAll('pre').forEach(pre => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.title = 'Copy to clipboard';
+    btn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy</span>`;
+    pre.appendChild(btn);
+    btn.addEventListener('click', () => {
+      const text = pre.querySelector('code').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Copied</span>`;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy</span>`;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+
+  // Scroll-spy active nav
+  const steps = document.querySelectorAll('.step');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  steps.forEach(s => observer.observe(s));
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    sidebar.querySelectorAll('.nav-link').forEach(link =>
+      link.addEventListener('click', () => sidebar.classList.remove('open'))
+    );
+  }
+</script>
+
+</body>
+</html>
