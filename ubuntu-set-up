@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Ubuntu Setup Reference Guide (Public)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ed;
+    --cream-2: #ede8df;
+    --cream-3: #e2ddd5;
+    --grey-box: #f0f0f2;
+    --grey-chip: #e4e4e8;
+    --grey-border: #dcdce0;
+    --white: #ffffff;
+    --charcoal: #2a2f2e;
+    --charcoal-mid: #4a5250;
+    --charcoal-light: #8a9896;
+    --seafoam: #4caf8a;
+    --seafoam-300: #70c9a8;
+    --seafoam-500: #2d9e72;
+    --seafoam-600: #1e845d;
+    --seafoam-xl: #d0f0e3;
+    --steel: #4a7fa5;
+    --steel-500: #376690;
+    --coral: #e8735a;
+    --coral-500: #d05a40;
+    --coral-xl: #fef2ef;
+
+    --f-display: 'Lora', serif;
+    --f-body: 'Figtree', sans-serif;
+    --f-mono: 'Fira Code', monospace;
+
+    /* legacy aliases kept so inherited markup/JS still resolve */
+    --bg: var(--cream);
+    --surface: var(--white);
+    --surface2: var(--cream-2);
+    --border: var(--cream-3);
+    --accent: var(--seafoam-500);
+    --accent2: var(--steel-500);
+    --text: var(--charcoal);
+    --text-muted: var(--charcoal-mid);
+    --code-bg: var(--white);
+    --code-border: var(--cream-3);
+    --green: var(--seafoam-500);
+    --orange: var(--coral-500);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--f-body);
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 264px;
+    background: var(--cream);
+    border-right: 1px solid var(--cream-3);
+    overflow-y: auto;
+    padding: 28px 0;
+    z-index: 100;
+  }
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--seafoam-300);
+  }
+  .sidebar-logo {
+    padding: 4px 26px 22px;
+    border-bottom: 1px solid var(--cream-2);
+    margin-bottom: 18px;
+  }
+  .sidebar-logo .logo-text {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--seafoam);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .sidebar-logo .logo-sub {
+    font-family: var(--f-display);
+    font-size: 15px;
+    color: var(--charcoal);
+    margin-top: 8px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .nav-section {
+    padding: 10px 26px 6px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+    font-weight: 500;
+  }
+  .nav-link {
+    display: block;
+    padding: 7px 26px;
+    color: var(--charcoal-mid);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-link:hover {
+    color: var(--charcoal);
+    background: var(--seafoam-xl);
+    border-left-color: var(--seafoam-300);
+  }
+  .nav-link.active {
+    color: var(--seafoam-600);
+    border-left-color: var(--seafoam-500);
+    background: var(--seafoam-xl);
+    font-weight: 500;
+  }
+  .nav-link .nav-num {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--seafoam-500);
+    margin-right: 8px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    margin-left: 264px;
+    max-width: 860px;
+    padding: 64px 60px;
+  }
+
+  .page-header {
+    margin-bottom: 56px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--cream-3);
+  }
+  .page-header .badge {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--seafoam);
+    background: var(--seafoam-xl);
+    border: none;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--f-display);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .page-header p {
+    color: var(--charcoal-mid);
+    font-size: 16px;
+    max-width: 640px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 60px;
+    scroll-margin-top: 32px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--cream-2);
+  }
+  .section-num {
+    font-family: var(--f-mono);
+    font-size: 26px;
+    color: var(--seafoam-500);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .section h2 {
+    font-family: var(--f-display);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .subsection {
+    margin-bottom: 26px;
+  }
+  .subsection h3 {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--charcoal-light);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .subsection h4 {
+    font-family: var(--f-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  p { color: var(--charcoal-mid); margin-bottom: 12px; font-size: 15px; }
+
+  /* ── CODE ── */
+  .code-wrapper { margin: 10px 0 16px; }
+
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--white);
+    border: 1px solid var(--cream-3);
+    border-radius: 6px;
+    color: var(--charcoal-light);
+    padding: 3px 8px 3px 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0;
+    pointer-events: none;
+    font-family: var(--f-body);
+    font-size: 12px;
+  }
+  pre:hover .copy-btn { opacity: 1; pointer-events: all; }
+  .copy-btn:hover {
+    background: var(--white);
+    border-color: var(--seafoam-300);
+    color: var(--charcoal);
+  }
+  .copy-btn.copied { color: var(--seafoam-600); border-color: var(--seafoam-500); }
+  .copy-btn svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  pre {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--steel-500);
+    border-radius: 6px;
+    padding: 14px 20px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+    position: relative;
+  }
+  pre code {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--charcoal);
+    line-height: 1.6;
+    display: block;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  pre code .cmd, pre code .flag, pre code .path, pre code .value { color: var(--charcoal); }
+  pre code .comment { color: var(--charcoal-light); font-style: italic; }
+
+  code {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    background: var(--grey-chip);
+    border: none;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--charcoal);
+  }
+
+  /* ── LISTS ── */
+  ul { list-style: none; margin: 8px 0 16px; }
+  ul li {
+    padding: 5px 0 5px 20px;
+    color: var(--charcoal-mid);
+    font-size: 15px;
+    position: relative;
+  }
+  ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--seafoam-500);
+    font-weight: 700;
+  }
+  ul li strong { color: var(--charcoal); font-weight: 600; }
+
+  /* ── CALLOUTS ── */
+  .note {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--coral);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--charcoal-mid);
+  }
+  .note::before {
+    content: 'Note';
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral-500);
+    margin-bottom: 6px;
+  }
+
+  .success {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-left: 3px solid var(--seafoam-300);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: var(--charcoal-mid);
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--cream-2);
+    margin: 28px 0;
+  }
+
+  /* ── CARDS / GRID ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 12px 0;
+  }
+  .card {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .card h4 {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--seafoam-600);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .card ul li { font-size: 13px; }
+
+  /* ── SCHEDULE GRID ── */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .schedule-item {
+    background: var(--grey-box);
+    border: 1px solid var(--cream-3);
+    border-radius: 8px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .schedule-day {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--seafoam);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .schedule-task {
+    font-family: var(--f-body);
+    font-size: 14px;
+    color: var(--charcoal);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .schedule-sub { font-size: 12px; color: var(--charcoal-light); }
+
+  /* ── MOBILE ── */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 16px; left: 16px;
+    z-index: 200;
+    background: var(--white);
+    border: 1px solid var(--cream-3);
+    border-radius: 8px;
+    width: 42px; height: 42px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu-toggle span,
+  .menu-toggle span::before,
+  .menu-toggle span::after {
+    content: '';
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--charcoal);
+    position: relative;
+    transition: 0.2s;
+  }
+  .menu-toggle span::before { position: absolute; top: -6px; }
+  .menu-toggle span::after { position: absolute; top: 6px; }
+
+  @media (max-width: 820px) {
+    .menu-toggle { display: flex; }
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      box-shadow: 0 0 40px rgba(42,47,46,0.12);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 72px 24px 56px; }
+    .page-header h1 { font-size: 30px; }
+    .grid-2, .schedule-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    .sidebar, .menu-toggle { display: none; }
+    .main { margin-left: 0; }
+    .copy-btn { display: none; }
+  }
+</style>
+
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span></button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">Reference Guide</div>
+    <div class="logo-sub">Ubuntu 26.04 LTS Setup</div>
+  </div>
+  <div class="nav-section">Sections</div>
+  <a class="nav-link" href="#sysinfo"><span class="nav-num">1</span> Know Your System</a>
+  <a class="nav-link" href="#apps"><span class="nav-num">2</span> Installing & Updating Apps</a>
+  <a class="nav-link" href="#firewall"><span class="nav-num">3</span> Firewall Setup</a>
+  <a class="nav-link" href="#dns"><span class="nav-num">4</span> Quad9 DNS over HTTPS</a>
+  <a class="nav-link" href="#custom"><span class="nav-num">5</span> Custom System Changes</a>
+  <a class="nav-link" href="#scanning"><span class="nav-num">6</span> Security Scanning &amp; Automation</a>
+  <a class="nav-link" href="#browsers"><span class="nav-num">7</span> Web Browsers</a>
+  <a class="nav-link" href="#maintenance"><span class="nav-num">8</span> General Maintenance</a>
+</nav>
+
+<main class="main">
+
+  <div class="page-header">
+    <span class="badge">Reference Guide</span>
+    <h1>Ubuntu Setup Reference</h1>
+    <p>Commands, settings, and configurations for a privacy-focused Ubuntu setup. Replace <code>username</code> and <code>YOUR_WIFI_NAME</code> throughout with your own values — see Section 1 to find them.</p>
+  </div>
+
+  <!-- SECTION 0 -->
+  <div class="section" id="sysinfo">
+    <div class="section-header">
+      <span class="section-num">1</span>
+      <h2>Know Your System</h2>
+    </div>
+
+    <p>Before following any commands in this guide, run these to find your specific values. Replace <code>username</code> and <code>YOUR_WIFI_NAME</code> throughout the document with what you find here.</p>
+
+    <div class="subsection">
+      <h3>Your Username</h3>
+      <p>This appears in file paths like <code>/home/username/</code> throughout the guide.</p>
+      <pre><code>whoami</code></pre>
+      <p>Or confirm the full home directory path:</p>
+      <pre><code>echo $HOME</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Your Wi-Fi Network Name</h3>
+      <p>Needed when running <code>nmcli connection modify</code> commands in the DNS section.</p>
+      <pre><code>nmcli connection show --active</code></pre>
+      <p>Look for the entry with <strong>wifi</strong> in the TYPE column — the name in the first column is your Wi-Fi network name.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Your Hardware</h3>
+      <h4>Laptop model:</h4>
+      <pre><code>sudo dmidecode -s system-product-name</code></pre>
+      <h4>Processor:</h4>
+      <pre><code>cat /proc/cpuinfo | grep "model name" | head -1</code></pre>
+      <h4>Full system info (opens GUI):</h4>
+      <pre><code>gnome-control-center info-overview</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Your Ubuntu Version</h3>
+      <p>Some commands and settings vary between Ubuntu releases — check yours first.</p>
+      <pre><code>lsb_release -a</code></pre>
+      <p>This guide was written for <strong>Ubuntu 26.04 LTS</strong>. Most commands also apply to 24.04 LTS.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Your DNS and Network Status</h3>
+      <p>Useful baseline to run before making any DNS changes so you know your starting state.</p>
+      <pre><code>resolvectl status</code></pre>
+      <h4>Check current active connections:</h4>
+      <pre><code>nmcli connection show --active</code></pre>
+      <h4>Check routing table:</h4>
+      <pre><code>ip route show</code></pre>
+    </div>
+  </div>
+  <div class="section" id="apps">
+    <div class="section-header">
+      <span class="section-num">2</span>
+      <h2>Installing &amp; Updating Apps</h2>
+    </div>
+
+    <div class="subsection">
+      <h3>Package Managers Overview</h3>
+      <ul>
+        <li><strong>apt</strong> — main package manager for most apps</li>
+        <li><strong>snap</strong> — Ubuntu's sandboxed app system (auto-updates)</li>
+        <li><strong>flatpak</strong> — cross-distro app system (manual updates needed)</li>
+        <li><strong>.deb files</strong> — manually downloaded packages</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>apt Commands</h3>
+      <h4>Update package list and upgrade all apt apps:</h4>
+      <pre><code>sudo apt update && sudo apt upgrade</code></pre>
+      <h4>Install a specific app:</h4>
+      <pre><code>sudo apt install &lt;appname&gt;</code></pre>
+      <h4>Fix interrupted installs:</h4>
+      <pre><code>sudo dpkg --configure -a
+sudo apt install -f</code></pre>
+      <h4>Install common media codecs:</h4>
+      <pre><code>sudo apt install ubuntu-restricted-extras</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Snap Commands</h3>
+      <h4>Manually update all snaps:</h4>
+      <pre><code>sudo snap refresh</code></pre>
+      <h4>Remove a snap:</h4>
+      <pre><code>sudo snap remove &lt;appname&gt;</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Flatpak Commands</h3>
+      <h4>Add Flathub repository (first-time setup):</h4>
+      <pre><code>sudo apt install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</code></pre>
+      <h4>Update all Flatpak apps:</h4>
+      <pre><code>flatpak update</code></pre>
+      <h4>Uninstall a Flatpak app:</h4>
+      <pre><code>flatpak uninstall &lt;app.id&gt;</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Installing .deb Files</h3>
+      <pre><code>cd ~/Downloads
+sudo dpkg -i filename.deb
+sudo apt -f install    # fixes any missing dependencies</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Update Everything at Once</h3>
+      <pre><code>sudo apt update && sudo apt upgrade && sudo snap refresh && flatpak update</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Automated Updates (Anacron)</h3>
+      <p>System updates are handled automatically via anacron — see <strong>Section 6</strong> for the full anacron setup. The monthly update job runs:</p>
+      <pre><code>apt-get update && apt-get upgrade -y && snap refresh && flatpak update -y</code></pre>
+      <h4>Run updates manually anytime:</h4>
+      <pre><code>sudo apt update && sudo apt upgrade && sudo snap refresh && flatpak update</code></pre>
+      <h4>View current anacron jobs:</h4>
+      <pre><code>sudo cat /etc/anacrontab</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Apps Installed &amp; Their Method</h3>
+      <div class="grid-2">
+        <div class="card">
+          <h4>via apt</h4>
+          <ul>
+            <li>R — <code>r-base</code></li>
+            <li>VLC</li>
+            <li>ClamAV + ClamTK</li>
+            <li>rkhunter</li>
+            <li>chkrootkit</li>
+            <li>TLP + tlp-rdw</li>
+            <li>Okular</li>
+            <li>mat2</li>
+            <li>fail2ban</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>via .deb download</h4>
+          <ul>
+            <li>ProtonVPN</li>
+            <li>Signal</li>
+            <li>RStudio (posit.co)</li>
+            <li>Proton Authenticator</li>
+            <li>Brave browser</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>via Flatpak</h4>
+          <ul>
+            <li>Proton Pass</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Firefox Extensions</h4>
+          <ul>
+            <li>uBlock Origin</li>
+            <li>Privacy Badger</li>
+            <li>Facebook Container</li>
+            <li>Multi-Account Containers</li>
+            <li>ClearURLs</li>
+            <li>Proton Pass</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="firewall">
+    <div class="section-header">
+      <span class="section-num">3</span>
+      <h2>Firewall Setup (UFW)</h2>
+    </div>
+
+    <div class="subsection">
+      <h4>Enable the firewall:</h4>
+      <pre><code>sudo ufw enable</code></pre>
+      <h4>Check firewall status:</h4>
+      <pre><code>sudo ufw status</code></pre>
+      <h4>Allow a specific port:</h4>
+      <pre><code>sudo ufw allow 22    # example: SSH</code></pre>
+      <h4>Deny a specific port:</h4>
+      <pre><code>sudo ufw deny 23</code></pre>
+      <h4>Disable the firewall (if needed):</h4>
+      <pre><code>sudo ufw disable</code></pre>
+      <div class="note">Default UFW rules are sensible for a personal laptop — no additional configuration needed beyond enabling it.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="dns">
+    <div class="section-header">
+      <span class="section-num">4</span>
+      <h2>Quad9 DNS over HTTPS</h2>
+    </div>
+
+    <p>Encrypts all DNS lookups system-wide so your ISP cannot see which domains you're querying. Quad9 also blocks known malicious domains automatically.</p>
+
+    <div class="subsection">
+      <h3>Step 1: Configure systemd-resolved</h3>
+      <pre><code>sudo nano /etc/systemd/resolved.conf</code></pre>
+      <p>Edit these lines (remove # and set values):</p>
+      <pre><code>DNS=9.9.9.9#dns.quad9.net
+FallbackDNS=149.112.112.112#dns.quad9.net
+DNSOverTLS=opportunistic</code></pre>
+      <h4>Save and restart:</h4>
+      <pre><code>sudo systemctl restart systemd-resolved</code></pre>
+      <div class="note">Use <strong>opportunistic</strong> rather than <strong>yes</strong> — strict mode prevents ProtonVPN from taking over DNS when the VPN connects, breaking browsing. Opportunistic uses TLS when available but hands off gracefully to ProtonVPN's DNS when the VPN tunnel is active. Privacy is identical since WireGuard/OpenVPN already encrypts all traffic including DNS.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Step 2: Configure NetworkManager</h3>
+      <pre><code>sudo nano /etc/NetworkManager/NetworkManager.conf</code></pre>
+      <p>Add under the <code>[main]</code> section:</p>
+      <pre><code>dns=systemd-resolved</code></pre>
+      <h4>Restart NetworkManager:</h4>
+      <pre><code>sudo systemctl restart NetworkManager</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Step 3: Set Per-Connection DNS</h3>
+      <h4>Find your Wi-Fi connection name:</h4>
+      <pre><code>nmcli connection show</code></pre>
+      <h4>Apply Quad9 to your Wi-Fi connection:</h4>
+      <pre><code>nmcli connection modify "YOUR_WIFI_NAME" ipv4.dns "9.9.9.9 149.112.112.112" ipv4.ignore-auto-dns yes
+nmcli connection down "YOUR_WIFI_NAME" && nmcli connection up "YOUR_WIFI_NAME"</code></pre>
+      <div class="note">Repeat this step for each new Wi-Fi network you connect to — DNS settings are stored per connection.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Verify DNS is Working</h3>
+      <pre><code>resolvectl status</code></pre>
+      <p>Look for: <code>Current DNS Server: 9.9.9.9#dns.quad9.net</code> and <code>+DNSOverTLS</code> on both Global and your Wi-Fi link.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Firefox DoH Settings</h3>
+      <ul>
+        <li>Settings → Privacy &amp; Security → DNS over HTTPS</li>
+        <li>Set to <strong>Max Protection</strong></li>
+        <li>Provider: Custom → <code>https://dns.quad9.net/dns-query</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section" id="custom">
+    <div class="section-header">
+      <span class="section-num">5</span>
+      <h2>Custom System Changes</h2>
+    </div>
+
+    <div class="subsection">
+      <h3>Startup Applications</h3>
+      <p>These apps are configured to launch automatically on every login — keeping your privacy and usability setup active without manual intervention.</p>
+
+      <h4>Caffeine Indicator</h4>
+      <p>Add via GNOME Tweaks → Startup Applications → click + and add Caffeine Indicator. Or via terminal:</p>
+      <pre><code>mkdir -p ~/.config/autostart
+cp /usr/share/applications/caffeine-indicator.desktop ~/.config/autostart/</code></pre>
+      <p>Verify it's set to autostart:</p>
+      <pre><code>ls ~/.config/autostart/</code></pre>
+      <p>The coffee cup icon will appear in the top bar automatically on every login — click to activate when casting, click again when done.</p>
+
+      <hr class="divider">
+
+      <h4>ProtonVPN</h4>
+      <p>Configure within the ProtonVPN app rather than GNOME Tweaks — go to ProtonVPN → Settings → General and set:</p>
+      <ul>
+        <li><strong>Auto connect:</strong> <code>US</code> for fastest US server, or <code>Fastest</code> for fastest server regardless of country</li>
+        <li><strong>Start app minimized:</strong> on — launches silently to the tray without opening the full window</li>
+      </ul>
+      <p>Then add ProtonVPN to startup applications via GNOME Tweaks → Startup Applications → click + and add ProtonVPN.</p>
+      <div class="note">Make sure Kill Switch remains off in ProtonVPN settings — as documented in Section 7, Kill Switch caused routing conflicts on Ubuntu that broke browsing.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Chromecast</h3>
+      <p>Google Cast works on Linux through Chromium-based browsers. Brave (already installed) supports casting natively — no additional software needed.</p>
+      <ul>
+        <li>Click the three-dot menu in Brave → <strong>Cast...</strong> or <strong>Save and share → Cast...</strong></li>
+        <li>Your Chromecast device should appear if it's on the same Wi-Fi network</li>
+        <li>Make sure your laptop and Chromecast are on the <strong>same Wi-Fi network</strong> — casting won't work across different networks</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Caffeine — Prevent Sleep During Casting</h3>
+      <p>Prevents the computer from sleeping or disconnecting during Chromecast sessions. Adds a coffee cup icon to the system tray to toggle on/off.</p>
+      <pre><code>sudo apt install caffeine</code></pre>
+      <p>Launch <strong>Caffeine Indicator</strong> from your app menu. Click the coffee cup icon in the top bar to activate — the cup appears full when active.</p>
+      <div class="note">Remember to turn Caffeine off when done casting — leaving it active permanently defeats battery optimization settings and drains the battery faster when unplugged. If the lock screen still activates while casting, go to Settings → Privacy → Screen Lock → increase the Automatic Screen Lock Delay.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Bluetooth Default Off on Boot</h3>
+      <p>By default Ubuntu restores the previous bluetooth state on reboot. This disables it by default on every boot — reducing attack surface and saving battery. You can still enable it manually whenever needed via Settings → Bluetooth.</p>
+      <pre><code>sudo nano /etc/bluetooth/main.conf</code></pre>
+      <p>Find and change:</p>
+      <pre><code>AutoEnable=false</code></pre>
+      <p>Save, then restart the bluetooth service:</p>
+      <pre><code>sudo systemctl restart bluetooth</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Volume Control</h3>
+      <p>PulseAudio Volume Control gives per-app volume control and surfaces additional volume headroom not available in the standard Ubuntu slider — without distortion risk.</p>
+      <pre><code>sudo apt install pavucontrol</code></pre>
+      <p>Launch from your app menu. Adjust per-app and system-wide volumes independently.</p>
+      <div class="note">If you still need volume above 100% after using pavucontrol, you can enable over-amplification — but avoid leaving it maxed on built-in speakers for extended periods: <code>gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true</code></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>GNOME Tweaks</h3>
+      <p>GNOME Tweaks unlocks additional customization options not available in the standard Settings app — fonts, window behavior, startup apps, and more.</p>
+      <h4>Install GNOME Tweaks:</h4>
+      <pre><code>sudo apt install gnome-tweaks</code></pre>
+      <p>Launch from your app menu — useful settings to explore include window titlebars, font sizes, and startup application management.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Click to Minimize</h3>
+      <p>Makes clicking an already-open app's dock icon minimize it, rather than just switching to it — more consistent with Windows behavior.</p>
+      <pre><code>gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'</code></pre>
+      <p>Takes effect immediately — no reboot needed.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Notifications</h3>
+      <ul>
+        <li>Disable lock screen notifications: Settings → Notifications → toggle off Lock Screen Notifications</li>
+        <li>Disable per-app notifications: Settings → Notifications → select individual apps</li>
+        <li>Do Not Disturb: click time/date in top bar → toggle Do Not Disturb</li>
+      </ul>
+      <h4>Disable screenshot shutter sound:</h4>
+      <pre><code>gsettings set org.gnome.desktop.sound event-sounds false</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Clock Format (12-hour)</h3>
+      <pre><code>gsettings set org.gnome.desktop.interface clock-format '12h'</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Touchpad Scroll Speed</h3>
+      <ul>
+        <li>Settings → Mouse &amp; Touchpad → Touchpad → Scrolling Speed slider</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Battery Optimization</h3>
+      <h4>Install and enable TLP:</h4>
+      <pre><code>sudo apt install tlp tlp-rdw
+sudo systemctl enable tlp
+sudo systemctl start tlp</code></pre>
+      <h4>Install PowerTop:</h4>
+      <pre><code>sudo apt install powertop
+sudo powertop --auto-tune</code></pre>
+      <ul>
+        <li>Settings → Power → set Power Mode to <strong>Power Saver</strong> when unplugged</li>
+        <li>Enable <strong>Automatic Suspend</strong> on battery</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Set Default PDF Reader (Okular)</h3>
+      <pre><code>xdg-mime default org.kde.okular.desktop application/pdf</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Automatic Security Updates</h3>
+      <pre><code>sudo apt install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Disable Crash Reports</h3>
+      <pre><code>sudo systemctl disable apport</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Kernel Security Hardening</h3>
+      <pre><code>sudo nano /etc/sysctl.conf
+
+# Add at bottom:
+net.ipv4.ip_forward=0
+net.ipv4.icmp_echo_ignore_broadcasts=1
+net.ipv4.conf.all.accept_source_route=0
+net.ipv4.tcp_syncookies=1</code></pre>
+      <h4>Apply changes:</h4>
+      <pre><code>sudo sysctl -p</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Metadata Stripping (before sharing files)</h3>
+      <pre><code>mat2 filename.pdf</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h3>Secure File Deletion</h3>
+      <pre><code>srm -r ~/path/to/sensitive/file</code></pre>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section" id="scanning">
+    <div class="section-header">
+      <span class="section-num">6</span>
+      <h2>Security Scanning &amp; Automation</h2>
+    </div>
+
+    <!-- ANACRON -->
+    <div class="subsection">
+      <h3>Anacron — Automated Scheduling</h3>
+      <p>Anacron is used instead of cron for laptop use — it runs missed jobs the next time the laptop is on rather than skipping them entirely if the laptop was off or asleep at the scheduled time.</p>
+    </div>
+
+    <div class="subsection">
+      <h4>Install Anacron:</h4>
+      <pre><code>sudo apt install anacron</code></pre>
+      <h4>Edit the anacron schedule:</h4>
+      <pre><code>sudo nano /etc/anacrontab</code></pre>
+      <p>Add these lines at the bottom:</p>
+      <pre><code>7	10	clamav-scan	freshclam && clamscan -r -i --log=/home/username/clamav-scan.log /home/username/
+7	15	rkhunter-scan	rkhunter --check --skip-keypress --report-warnings-only --logfile /home/username/rkhunter-scan.log
+7	20	chkrootkit-scan	chkrootkit 2>&1 | grep -i "infected\|warning" >> /home/username/chkrootkit-scan.log
+30	25	system-update	apt-get update && apt-get upgrade -y && snap refresh && flatpak update -y</code></pre>
+      <p>The columns mean: <strong>period in days</strong> | <strong>delay in minutes after boot</strong> | <strong>job name</strong> | <strong>command</strong></p>
+      <div class="note">Replace <code>username</code> with your actual username throughout. Jobs are staggered by delay to avoid running simultaneously.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Remove AC Power Requirement</h4>
+      <p>By default anacron only runs when plugged in. To allow it to run on battery:</p>
+      <pre><code>sudo mkdir -p /etc/systemd/system/anacron.service.d/
+sudo nano /etc/systemd/system/anacron.service.d/override.conf</code></pre>
+      <p>Add this content:</p>
+      <pre><code>[Unit]
+ConditionACPower=</code></pre>
+      <p>Save, then reload:</p>
+      <pre><code>sudo systemctl daemon-reload
+sudo systemctl restart anacron</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Verify Anacron is Running</h4>
+      <pre><code>sudo systemctl status anacron</code></pre>
+      <p>Look for <strong>active (running)</strong> and all four jobs listed as scheduled. The override.conf drop-in should be visible confirming the AC power fix is applied.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Automated Schedule</h4>
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <div class="schedule-day">Weekly</div>
+          <div class="schedule-task">ClamAV</div>
+          <div class="schedule-sub">Malware scan</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Weekly</div>
+          <div class="schedule-task">rkhunter</div>
+          <div class="schedule-sub">Rootkit scan</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Weekly</div>
+          <div class="schedule-task">chkrootkit</div>
+          <div class="schedule-sub">Rootkit scan</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Monthly</div>
+          <div class="schedule-task">System updates</div>
+          <div class="schedule-sub">apt, snap, flatpak</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Purpose of Each Scan</h4>
+      <div class="grid-2">
+        <div class="card">
+          <h4>ClamAV</h4>
+          <ul>
+            <li>Scans files for known <strong>malware, viruses, and trojans</strong></li>
+            <li>Works from a database of known threat signatures updated regularly via <code>freshclam</code></li>
+            <li>Best at catching malicious files downloaded from the internet or received as attachments</li>
+            <li>Think of it as a file-level inspector</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>rkhunter</h4>
+          <ul>
+            <li>Scans for <strong>rootkits</strong> — malware that hides itself deep in the system to avoid detection</li>
+            <li>Checks system binaries against a known-good baseline set when you ran <code>--propupd</code></li>
+            <li>Also checks for suspicious network ports, hidden files, and known attack signatures</li>
+            <li>Think of it as a system integrity checker</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>chkrootkit</h4>
+          <ul>
+            <li>Also scans for <strong>rootkits</strong> using different detection methods than rkhunter</li>
+            <li>Running both gives broader coverage since they use independent approaches</li>
+            <li>More prone to false positives on Ubuntu than rkhunter</li>
+            <li>Think of it as a second opinion on system integrity</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Why run all three?</h4>
+          <ul>
+            <li>ClamAV catches things rkhunter/chkrootkit miss (downloaded malware)</li>
+            <li>rkhunter and chkrootkit catch things ClamAV misses (deep system compromise)</li>
+            <li>No single scanner catches everything — layered scanning gives the most complete picture</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Monthly Log Review — One Command</h4>
+      <p>Run this once a month for a quick summary of all three scan results:</p>
+      <pre><code>echo "=== ClamAV ===" && grep "Infected files" /home/username/clamav-scan.log | tail -3
+echo "=== rkhunter ===" && grep "Warning" /home/username/rkhunter-scan.log | tail -5
+echo "=== chkrootkit ===" && grep "INFECTED" /home/username/chkrootkit-scan.log | tail -5</code></pre>
+      <p>A clean result looks like:</p>
+      <ul>
+        <li><strong>ClamAV:</strong> <code>Infected files: 0</code></li>
+        <li><strong>rkhunter:</strong> no output, or only warnings you've already identified as false positives</li>
+        <li><strong>chkrootkit:</strong> no output, or known false positives on basic utilities</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Interpreting Results &amp; What to Do</h4>
+
+      <h4>ClamAV finds an infected file:</h4>
+      <ul>
+        <li>Note the file path reported</li>
+        <li>Do not open or run the file</li>
+        <li>Search the virus name online to understand what it is</li>
+        <li>If it's in Downloads, delete it immediately:</li>
+      </ul>
+      <pre><code>rm ~/Downloads/suspicious-filename</code></pre>
+
+      <h4>rkhunter or chkrootkit warnings:</h4>
+      <ul>
+        <li>Check if the warning existed in your previous scan — recurring warnings are usually false positives</li>
+        <li>Verify flagged system files belong to legitimate packages:</li>
+      </ul>
+      <pre><code>sudo dpkg -S /path/to/flagged/file</code></pre>
+      <p>If dpkg returns a package name it's legitimate. If it returns nothing, investigate further.</p>
+
+      <h4>Check if a warning matches a recent system update:</h4>
+      <pre><code>grep "install\|upgrade" /var/log/dpkg.log | tail -20</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Escalation Guide</h4>
+      <ul>
+        <li><strong>False positive (most common)</strong> — verify with dpkg, search online, confirm it appeared in previous scans. No action needed</li>
+        <li><strong>Suspicious file in Downloads</strong> — delete the file, run a full ClamAV scan, change passwords if the file was opened</li>
+        <li><strong>Unexpected system file change</strong> — check dpkg.log for recent updates; if it matches a legitimate update, no action needed</li>
+        <li><strong>Genuine infection suspected</strong> — disconnect from internet, don't log into any accounts from this machine, restore from a clean Timeshift snapshot, change passwords from a different device</li>
+      </ul>
+      <div class="note">On a well-maintained Ubuntu system with a privacy-focused setup, the overwhelming majority of scan results will be clean or known false positives. Genuine infections are rare — the scans are insurance, not a daily concern.</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CLAMAV -->
+    <div class="subsection">
+      <h3>ClamAV (Malware) — Manual Use</h3>
+      <h4>Update virus definitions:</h4>
+      <pre><code>sudo freshclam</code></pre>
+      <h4>Scan home folder manually:</h4>
+      <pre><code>clamscan -r --bell -i ~/</code></pre>
+      <h4>Scan a specific file before opening:</h4>
+      <pre><code>clamscan ~/Downloads/filename.pdf</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <!-- RKHUNTER -->
+    <div class="subsection">
+      <h3>rkhunter (Rootkits) — Manual Use</h3>
+      <h4>Update and set system baseline (run once after install):</h4>
+      <pre><code>sudo rkhunter --update
+sudo rkhunter --propupd</code></pre>
+      <h4>Run a manual scan:</h4>
+      <pre><code>sudo rkhunter --check --skip-keypress</code></pre>
+      <h4>View warnings:</h4>
+      <pre><code>sudo cat /var/log/rkhunter.log | grep -i "error\|fail\|warn"</code></pre>
+      <div class="note">rkhunter 1.4.6 has known update mirror issues on Ubuntu. If --update fails, this is expected — the existing definitions still work for rootkit detection.</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CHKROOTKIT -->
+    <div class="subsection">
+      <h3>chkrootkit (Rootkits) — Manual Use</h3>
+      <h4>Run a manual scan:</h4>
+      <pre><code>sudo chkrootkit</code></pre>
+      <div class="note">Many chkrootkit warnings on basic utilities (basename, echo, date) are false positives on Ubuntu. Verify with: <code>sudo dpkg -S /bin/&lt;command&gt;</code></div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TIMESHIFT -->
+    <div class="subsection">
+      <h3>Timeshift — System Snapshots</h3>
+      <p>Timeshift takes snapshots of your system that you can roll back to if something goes wrong — a broken update, misconfigured system file, or failed install. It protects your system configuration but <strong>not personal files in /home</strong> — keep a separate backup for personal data.</p>
+    </div>
+
+    <div class="subsection">
+      <h4>Install Timeshift:</h4>
+      <pre><code>sudo apt install timeshift</code></pre>
+      <h4>Open the setup wizard:</h4>
+      <p>Launch Timeshift from your app menu — it runs a setup wizard on first open:</p>
+      <ul>
+        <li><strong>Snapshot type:</strong> RSYNC (recommended)</li>
+        <li><strong>Snapshot location:</strong> main drive (external drive is better if available)</li>
+        <li><strong>Schedule:</strong> Weekly — keep 3; Monthly — keep 2; Daily optional</li>
+        <li><strong>User home directories:</strong> leave excluded (not designed for personal file backup)</li>
+      </ul>
+      <div class="note">Timeshift manages its own scheduling and handles missed snapshots automatically — no cron or anacron needed.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Take a Manual Snapshot</h4>
+      <p>Always take one before major system changes, updates, or installing unfamiliar software:</p>
+      <pre><code>sudo timeshift --create --comments "Before major change"</code></pre>
+      <p>Or via the GUI: open Timeshift → click <strong>Create</strong>.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Restore from a Snapshot</h4>
+      <ul>
+        <li>Open Timeshift → select the snapshot → click <strong>Restore</strong> → reboot</li>
+        <li>If the system won't boot at all, Timeshift can be accessed from a live Ubuntu USB</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Useful Timeshift Commands</h4>
+      <h4>List available snapshots:</h4>
+      <pre><code>sudo timeshift --list</code></pre>
+      <h4>Delete old snapshots:</h4>
+      <pre><code>sudo timeshift --delete</code></pre>
+    </div>
+
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section" id="browsers">
+    <div class="section-header">
+      <span class="section-num">7</span>
+      <h2>Web Browsers</h2>
+    </div>
+
+    <!-- FIREFOX -->
+    <div class="subsection">
+      <h3>Firefox — Primary Browser</h3>
+    </div>
+
+    <div class="subsection">
+      <h4>Privacy Settings</h4>
+      <ul>
+        <li>Enhanced Tracking Protection: <strong>Strict</strong></li>
+        <li>HTTPS-Only Mode: <strong>enabled in all windows</strong></li>
+        <li>DNS over HTTPS: <strong>Max Protection</strong> → Custom → <code>https://dns.quad9.net/dns-query</code></li>
+        <li>Telemetry/data collection: <strong>disabled</strong></li>
+        <li>Default search engine: <strong>DuckDuckGo</strong></li>
+        <li>Lock screen notifications: <strong>disabled</strong></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Extensions Installed</h4>
+      <div class="grid-2">
+        <div class="card">
+          <h4>Active</h4>
+          <ul>
+            <li><strong>uBlock Origin</strong> — ad &amp; tracker blocking</li>
+            <li><strong>Privacy Badger</strong> — automatic tracker blocking (EFF)</li>
+            <li><strong>Facebook Container</strong> — isolates Facebook tracking</li>
+            <li><strong>Multi-Account Containers</strong> — session isolation</li>
+            <li><strong>ClearURLs</strong> — strips tracking parameters</li>
+            <li><strong>Proton Pass</strong> — password manager</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Disabled / Removed</h4>
+          <ul>
+            <li>Adblock Plus — redundant with uBlock Origin</li>
+            <li>DuckDuckGo Privacy Essentials — redundant with other extensions</li>
+            <li>Temporary Containers — too disruptive for daily use</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>What's Protected</h4>
+      <div class="grid-2">
+        <div class="card">
+          <h4>DNS Privacy</h4>
+          <ul>
+            <li>Quad9 DoH — system-wide</li>
+            <li>Firefox Max Protection DoH</li>
+            <li>ProtonVPN DNS when active</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Browser Tracking</h4>
+          <ul>
+            <li>uBlock Origin</li>
+            <li>Privacy Badger</li>
+            <li>ClearURLs</li>
+            <li>Strict tracking protection</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Network Traffic</h4>
+          <ul>
+            <li>ProtonVPN (when active)</li>
+            <li>UFW firewall</li>
+            <li>HTTPS-Only mode</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Files &amp; System</h4>
+          <ul>
+            <li>mat2 — metadata stripping</li>
+            <li>secure-delete — file wiping</li>
+            <li>ClamAV — malware scanning</li>
+            <li>rkhunter + chkrootkit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>ProtonVPN Usage Guidelines</h4>
+      <ul>
+        <li><strong>Always use</strong> on public Wi-Fi (coffee shops, airports, libraries)</li>
+        <li><strong>Always use</strong> for source communication and sensitive research</li>
+        <li><strong>Optional</strong> at home for casual browsing — Quad9 covers DNS privacy</li>
+        <li><strong>Toggle off temporarily</strong> if banking sites flag the VPN connection</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- BRAVE -->
+    <div class="subsection">
+      <h3>Brave — PWA Host (Claude &amp; Google Messages)</h3>
+      <p>Brave is used only as a PWA host. It has known bugs on Linux where PWAs don't appear in the app menu or dock automatically — the workaround is to manually create a <code>.desktop</code> file for each PWA.</p>
+    </div>
+
+    <div class="subsection">
+      <h4>Step 1: Install the PWA in Brave</h4>
+      <ul>
+        <li>Go to the site (e.g. <strong>claude.ai</strong>) and sign in</li>
+        <li>Click the three-dot menu → look for <strong>"Install Claude..."</strong> or <strong>"Install as app"</strong></li>
+        <li>Confirm the install — Brave will open it in a standalone window</li>
+        <li>If no install option appears, check <code>brave://apps</code> to see installed PWAs</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Step 2: Create a .desktop File Manually</h4>
+      <p>For Claude:</p>
+      <pre><code>nano ~/.local/share/applications/claude-pwa.desktop</code></pre>
+      <pre><code>[Desktop Entry]
+Name=Claude
+Exec=/usr/bin/brave-browser --app=https://claude.ai
+Icon=brave-browser
+Type=Application
+Categories=Network;</code></pre>
+      <p>For Google Messages:</p>
+      <pre><code>nano ~/.local/share/applications/messages-pwa.desktop</code></pre>
+      <pre><code>[Desktop Entry]
+Name=Google Messages
+Exec=/usr/bin/brave-browser --app=https://messages.google.com/web
+Icon=brave-browser
+Type=Application
+Categories=Network;</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Step 3: Refresh the App Menu</h4>
+      <pre><code>update-desktop-database ~/.local/share/applications/</code></pre>
+      <p>Apps should now appear in the GNOME app menu and can be pinned to the dock by right-clicking → <strong>Pin to Dash</strong>.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Changing a PWA Icon</h4>
+      <p>Brave auto-generates <code>.desktop</code> files with random names rather than readable ones. To find and edit them:</p>
+      <ul>
+        <li>Open the <strong>Files app</strong> and press <strong>Ctrl+H</strong> to show hidden folders</li>
+        <li>Navigate to <strong>Home → .local → share → applications</strong></li>
+        <li>Right-click each <code>brave-</code> file → <strong>Open With Text Editor</strong></li>
+        <li>Check the <code>Name=</code> line to identify which file is Claude vs Google Messages</li>
+        <li>Add or update the <code>Icon=</code> line with the full path to your PNG image</li>
+      </ul>
+      <p>For example, if you saved your icon to a folder in Pictures:</p>
+      <pre><code>Icon=/home/username/Pictures/icons/claude.png</code></pre>
+      <p>Save the file — the icon should update immediately. If not, run:</p>
+      <pre><code>update-desktop-database ~/.local/share/applications/</code></pre>
+      <p>And log out/in to force the dock icon to refresh.</p>
+      <div class="note">If Brave overwrites your icon after an update, just repeat the process — the .desktop files are easy to find and edit via the Files app.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Finding PWA .desktop Files</h4>
+      <p>Brave generates random filenames for PWA desktop entries. The easiest way to find them is via the Files app (Ctrl+H → .local → share → applications). Alternatively via terminal:</p>
+      <pre><code>ls ~/.local/share/applications/</code></pre>
+      <p>Look for files starting with <code>brave-</code> — open each with a text editor to identify which is Claude vs Google Messages by checking the <code>Name=</code> line.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Brave Privacy Settings</h4>
+      <p>Go to <code>brave://settings/privacy</code>:</p>
+      <ul>
+        <li><strong>Shields</strong> — keep enabled</li>
+        <li><strong>Fingerprinting protection</strong> — set to <strong>Strict</strong></li>
+        <li><strong>Send a "Do Not Track" request</strong> — enable</li>
+        <li><strong>Block third-party cookies</strong> — enable</li>
+        <li><strong>WebRTC IP handling</strong> — set to <strong>Disable non-proxied UDP</strong> — critical with ProtonVPN to prevent real IP leaking through WebRTC</li>
+        <li><strong>Usage ping / diagnostics</strong> — disable all data sharing</li>
+      </ul>
+      <p>Go to <code>brave://settings/shields</code>:</p>
+      <ul>
+        <li>Trackers &amp; ads blocking: <strong>Aggressive</strong></li>
+        <li>Upgrade connections to HTTPS: <strong>Strict</strong></li>
+        <li>Block fingerprinting: <strong>Strict, may break sites</strong></li>
+        <li>Block cookies: <strong>Only cross-site cookies</strong></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Disable Unused Brave Features</h4>
+      <p>These features are off by default in current Brave versions but worth verifying:</p>
+      <ul>
+        <li><strong>Brave Rewards / BAT</strong> → <code>brave://rewards</code> — disable</li>
+        <li><strong>Brave Wallet</strong> → <code>brave://settings/wallet</code> → set to <strong>None</strong></li>
+        <li><strong>Brave News</strong> → toggle off at bottom of new tab page or <code>brave://settings/newTab</code></li>
+        <li><strong>Brave VPN</strong> — Linux only, may not appear; use ProtonVPN instead</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>DNS over HTTPS in Brave</h4>
+      <p>Go to <code>brave://settings/security</code>:</p>
+      <ul>
+        <li>Under <strong>Use secure DNS</strong> → select <strong>With Custom</strong></li>
+        <li>Enter: <code>https://dns.quad9.net/dns-query</code></li>
+      </ul>
+      <div class="note">When ProtonVPN is active it overrides this — that's expected and fine.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Extensions for Brave</h4>
+      <p>Keep extensions minimal in Brave — it's only used for PWAs.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h4>Worth Installing</h4>
+          <ul>
+            <li><strong>uBlock Origin Lite</strong> — use Lite version in Brave (Chromium's Manifest V3 restrictions prevent the full version); complements Brave Shields</li>
+            <li><strong>Proton Pass</strong> — consistent password manager</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Skip in Brave</h4>
+          <ul>
+            <li>Privacy Badger — redundant with Shields</li>
+            <li>ClearURLs — Shields handles tracking params</li>
+            <li>Facebook Container — Firefox-only</li>
+            <li>Any VPN extension — use system ProtonVPN</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>ProtonVPN Protocol &amp; Compatibility</h4>
+      <ul>
+        <li>Use <strong>WireGuard</strong> protocol (default) — fastest, most modern, best battery life</li>
+        <li>If browsing breaks when VPN connects, switch to <strong>OpenVPN (UDP)</strong> as fallback</li>
+        <li>PWAs staying connected with VPN requires <code>DNSOverTLS=opportunistic</code> in systemd-resolved — see Section 4</li>
+        <li>If kill switch is enabled and VPN drops, delete stale connections with: <code>nmcli connection delete pvpn-killswitch</code></li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>PWA-Specific Considerations</h4>
+      <ul>
+        <li>PWAs share Brave's cookie jar — signing out of one Google service may affect Google Messages</li>
+        <li>If a PWA breaks, try temporarily lowering Shields via the lion icon in the address bar</li>
+        <li>Google Messages requires your Pixel to be online — it routes through your phone</li>
+        <li>Re-pair Google Messages if the session expires: Pixel Messages app → menu → Device Pairing</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="section" id="maintenance">
+    <div class="section-header">
+      <span class="section-num">8</span>
+      <h2>General Maintenance</h2>
+    </div>
+
+    <p>Regular maintenance keeps your laptop running well for years. Split into physical cleaning, hardware health monitoring, and software hygiene.</p>
+
+    <!-- PHYSICAL CLEANING -->
+    <div class="subsection">
+      <h3>Physical Cleaning</h3>
+      <div class="note">Never spray anything directly onto the laptop — always apply liquid to a cloth first. Avoid household cleaners (Windex, multi-surface sprays) on any part of the laptop.</div>
+    </div>
+
+    <div class="subsection">
+      <h4>Screen</h4>
+      <p>Most sensitive component — the anti-glare coating can be permanently damaged by alcohol above 70% or abrasive materials.</p>
+      <ul>
+        <li><strong>For dust:</strong> dry microfiber cloth only</li>
+        <li><strong>For smudges:</strong> microfiber cloth slightly dampened with distilled water only</li>
+        <li><strong>Never use:</strong> Windex, glass cleaners, paper towels, or alcohol wipes</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Keyboard &amp; Chassis</h4>
+      <p>More durable than the screen but still requires care.</p>
+      <ul>
+        <li><strong>For cleaning and sanitizing:</strong> 70% isopropyl alcohol wipes — safe for keyboard and chassis surfaces (Dell recommended)</li>
+        <li><strong>For debris under keys:</strong> compressed air</li>
+        <li><strong>Never spray</strong> liquid near ports or vents</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Vents &amp; Ports</h4>
+      <ul>
+        <li>Compressed air only — never use liquid near vents or ports</li>
+        <li>Clean vents every <strong>6-12 months</strong> — dust buildup causes thermal throttling and reduced performance</li>
+        <li>Hold the fan still while blowing air into vents to avoid overspinning it</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Recommended Cleaning Kit</h4>
+      <ul>
+        <li>Microfiber cloths (pack of several)</li>
+        <li>Distilled water — for screen only</li>
+        <li>70% isopropyl alcohol wipes — for keyboard and chassis</li>
+        <li>Compressed air can — for vents and keyboard debris</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- BATTERY HEALTH -->
+    <div class="subsection">
+      <h3>Battery Health</h3>
+    </div>
+
+    <div class="subsection">
+      <h4>Check battery health:</h4>
+      <pre><code>upower -i /org/freedesktop/UPower/devices/battery_BAT0</code></pre>
+      <p>Key values to monitor:</p>
+      <ul>
+        <li><strong>energy-full</strong> vs <strong>energy-full-design</strong> — compare these to calculate remaining capacity</li>
+        <li><strong>capacity %</strong> — below 80% warrants a replacement</li>
+        <li><strong>charge-cycles</strong> — if available, high cycle counts indicate aging battery</li>
+      </ul>
+      <div class="note">Run this check every few months. If capacity drops below 80% within a year of a new battery installation, claim the warranty.</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Battery Charging Settings</h4>
+      <ul>
+        <li>Go to <strong>Settings → Power → Battery Charging</strong></li>
+        <li><strong>Preserve Battery Health</strong> — caps charge at ~80%, better for long-term battery longevity. Best if you mostly work plugged in</li>
+        <li><strong>Maximize Charge</strong> — charges to 100%, better if you regularly need maximum runtime away from power</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Battery Replacement</h4>
+      <ul>
+        <li>Find your battery part number via your service tag at <strong>dell.com/support</strong></li>
+        <li>Buy genuine Dell replacement parts directly from Dell for lithium-ion batteries — non-genuine batteries are a safety risk</li>
+        <li>Consider having a repair shop handle installation — buying the part yourself and paying labor only saves $30-50 vs shop-supplied parts</li>
+        <li>Battery replacement has zero impact on Ubuntu or any software — the SSD is completely separate</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SSD HEALTH -->
+    <div class="subsection">
+      <h3>SSD Health</h3>
+    </div>
+
+    <div class="subsection">
+      <h4>Install smartmontools (one time):</h4>
+      <pre><code>sudo apt install smartmontools</code></pre>
+      <h4>Run SSD health check:</h4>
+      <pre><code>sudo smartctl -a /dev/nvme0n1</code></pre>
+      <p>Key values to monitor:</p>
+      <ul>
+        <li><strong>SMART overall-health:</strong> should say PASSED</li>
+        <li><strong>Available Spare:</strong> should stay well above the threshold (50%)</li>
+        <li><strong>Percentage Used:</strong> manufacturer's estimate of drive life consumed — below 50% is healthy</li>
+        <li><strong>Media and Data Integrity Errors:</strong> should be 0</li>
+        <li><strong>Temperature:</strong> normal operating range is 25-50°C</li>
+      </ul>
+      <div class="note">Run this check every 6 months. If Available Spare drops below the threshold or errors appear, back up immediately.</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- RAM -->
+    <div class="subsection">
+      <h3>RAM Usage</h3>
+      <h4>Check current memory usage:</h4>
+      <pre><code>free -h</code></pre>
+      <p>Look at the <strong>available</strong> column — if it's consistently low (under 1-2GB) your system is under memory pressure and performance may suffer.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SOFTWARE HYGIENE -->
+    <div class="subsection">
+      <h3>Software Hygiene</h3>
+    </div>
+
+    <div class="subsection">
+      <h4>Clean up unused packages:</h4>
+      <pre><code>sudo apt autoremove && sudo apt autoclean</code></pre>
+      <h4>Check disk usage:</h4>
+      <pre><code>df -h</code></pre>
+      <p>Look at the <strong>Use%</strong> column for your main drive — above 85% is worth addressing by clearing unused files or apps.</p>
+      <h4>Check what's taking up space:</h4>
+      <pre><code>du -sh ~/* | sort -hr | head -20</code></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="subsection">
+      <h4>Timeshift Snapshots</h4>
+      <ul>
+        <li>Open <strong>Timeshift</strong> from your app menu to verify scheduled snapshots are running</li>
+        <li>Take a manual snapshot before any major system changes or updates</li>
+        <li>Keep 3-5 snapshots — older ones are deleted automatically based on your schedule setting</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- THERMAL PASTE -->
+    <div class="subsection">
+      <h3>Thermal Paste (Long Term)</h3>
+      <p>After 4-5 years the thermal paste between the CPU and heatsink can dry out, causing higher temperatures and the fan running constantly. Signs of degradation:</p>
+      <ul>
+        <li>Fan running loudly under light workloads</li>
+        <li>System feeling hot to the touch during normal use</li>
+        <li>Performance noticeably slower than it used to be</li>
+      </ul>
+      <p>This is a repair shop job — ask them to reapply thermal paste when you bring the laptop in for battery replacement, as they'll already have the laptop open.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- MAINTENANCE SCHEDULE -->
+    <div class="subsection">
+      <h3>Recommended Maintenance Schedule</h3>
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <div class="schedule-day">Monthly</div>
+          <div class="schedule-task">Software updates</div>
+          <div class="schedule-sub">apt, snap, flatpak</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Every 3 months</div>
+          <div class="schedule-task">Battery health</div>
+          <div class="schedule-sub">upower check</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Every 6 months</div>
+          <div class="schedule-task">SSD health</div>
+          <div class="schedule-sub">smartctl check</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Every 6 months</div>
+          <div class="schedule-task">Clean vents</div>
+          <div class="schedule-sub">Compressed air</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Every 6 months</div>
+          <div class="schedule-task">Disk cleanup</div>
+          <div class="schedule-sub">apt autoremove</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-day">Every 4-5 years</div>
+          <div class="schedule-task">Thermal paste</div>
+          <div class="schedule-sub">Repair shop</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+  // Wrap all pre blocks with copy button
+  document.querySelectorAll('pre').forEach(pre => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-wrapper';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.title = 'Copy to clipboard';
+    btn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy</span>`;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+      const text = pre.querySelector('code').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Copied</span>`;
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copy</span>`;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  if (menuToggle && sidebar) {
+    menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    sidebar.querySelectorAll('.nav-link').forEach(link =>
+      link.addEventListener('click', () => sidebar.classList.remove('open'))
+    );
+  }
+</script>
+
+</body>
+</html>
