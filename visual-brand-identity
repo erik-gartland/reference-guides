@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Brand Identity — Infographics Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── Palette ── */
+  --cream:          #f7f3ed;
+  --cream-2:        #ede8df;
+  --cream-3:        #e2ddd5;
+  --charcoal:       #2a2f2e;
+  --charcoal-mid:   #4a5250;
+  --charcoal-light: #8a9896;
+  --white:          #ffffff;
+
+  --seafoam:        #4caf8a;
+  --seafoam-500:    #2d9e72;
+  --seafoam-600:    #1e845d;
+  --seafoam-l:      #a4dfc8;
+  --seafoam-xl:     #d0f0e3;
+
+  --steel:          #4a7fa5;
+  --steel-500:      #376690;
+  --steel-600:      #265078;
+  --steel-l:        #9ec6de;
+  --steel-xl:       #d0e6f2;
+
+  --coral:          #e8735a;
+  --coral-500:      #d05a40;
+  --coral-l:        #f4b8aa;
+  --coral-xl:       #fef2ef;
+
+  --lavender:       #9d93e8;
+  --lavender-500:   #7d72d4;
+  --lavender-600:   #5e54b0;
+  --lavender-700:   #413b80;
+  --lavender-l:     #d4cef8;
+  --lavender-xl:    #f5f3fe;
+
+  /* ── Type ── */
+  --f-display: 'Lora', serif;
+  --f-body:    'Figtree', sans-serif;
+  --f-mono:    'Fira Code', monospace;
+  --f-chart:   'Montserrat', sans-serif;
+
+  /* ── Chart spacing (matching CBPP 10/14/28pt rhythm) ── */
+  --cs-1:  10px;   /* tight internal — axis tick gap, legend item gap */
+  --cs-2:  14px;   /* label to axis, pointer label margin */
+  --cs-3:  28px;   /* heading to subheading, chart to caption */
+  --cs-4:  15px;   /* chart outer padding */
+}
+
+body {
+  font-family: var(--f-body);
+  background: var(--white);
+  color: var(--charcoal);
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 48px;
+}
+
+/* ── PAGE TITLE ── */
+.page-title-block {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.page-eyebrow {
+  font-family: var(--f-chart);
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--charcoal-light);
+  margin-bottom: 6px;
+}
+.page-title {
+  font-family: var(--f-display);
+  font-size: 36px; font-weight: 500;
+  color: var(--charcoal); line-height: 1.1;
+}
+
+/* ── SECTION HEADING ── */
+.section-heading {
+  font-family: var(--f-display);
+  font-size: 24px; font-weight: 600; font-style: normal;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--cream-2);
+}
+
+/* ── SUBSECTION HEADING ── */
+.subsection-heading {
+  font-family: var(--f-chart);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--charcoal-light);
+  margin-bottom: 16px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--cream-2);
+}
+
+/* ── COLOUR PALETTE SECTION ── */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pal-swatch {
+  height: 64px;
+}
+.pal-row {
+  margin-bottom: 32px;
+}
+.pal-row-label {
+  font-family: var(--f-chart);
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--charcoal-light);
+  margin-bottom: 8px;
+}
+.pal-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+.pal-meta {
+  padding: 6px 0;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.pal-meta-name {
+  font-family: var(--f-chart);
+  font-size: 9px; font-weight: 700;
+  color: var(--charcoal);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+.pal-meta-hex {
+  font-family: var(--f-mono);
+  font-size: 10px; color: var(--charcoal-mid);
+}
+.pal-meta-role {
+  font-family: var(--f-chart);
+  font-size: 9px; color: var(--charcoal-light);
+}
+
+/* ── TYPOGRAPHY SECTION ── */
+.type-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+.type-table th {
+  font-family: var(--f-chart);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--charcoal-light);
+  border-bottom: 2px solid var(--cream-2);
+  padding: 0 24px 8px 0; text-align: left;
+}
+.type-table th:last-child { padding-right: 0; }
+.type-table td {
+  padding: 10px 24px 10px 0;
+  border-bottom: 1px solid var(--cream-2);
+  vertical-align: middle;
+}
+.type-table td:last-child { padding-right: 0; }
+
+.type-role {
+  font-family: var(--f-chart);
+  font-size: 10px; font-weight: 600;
+  color: var(--charcoal-mid);
+  letter-spacing: 0.04em;
+}
+.type-spec {
+  font-family: var(--f-mono);
+  font-size: 10px; color: var(--charcoal-light);
+  line-height: 1.6;
+}
+
+/* ── CHART TYPE LABELS ── */
+.chart-type-tag {
+  display: inline-block;
+  font-family: var(--f-chart);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px;
+  margin-bottom: 10px;
+  background: var(--seafoam-xl); color: var(--seafoam-500);
+}
+
+/* ── CHARTS GRID ── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.chart-single { margin-bottom: 48px; }
+
+/* ── CHART WRAPPER ── */
+.chart-wrap {
+  background: var(--white);
+  border: 1px solid var(--cream-2);
+  border-radius: 4px;
+  padding: var(--cs-4);
+  position: relative;
+}
+.chart-annotation-note {
+  position: absolute;
+  right: -8px; top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Chart heading — Montserrat */
+.chart-heading {
+  font-family: var(--f-chart);
+  font-size: 20px; font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.2;
+  margin-bottom: var(--cs-2);  /* 14px */
+}
+/* Chart subheading — Montserrat Regular */
+.chart-subhead {
+  font-family: var(--f-chart);
+  font-size: 16px; font-weight: 400;
+  color: var(--charcoal-mid);
+  line-height: 1.4;
+  margin-bottom: var(--cs-3); /* 28px */
+}
+/* Axis labels — Montserrat 14px regular */
+.chart-axis-label {
+  font-family: var(--f-chart);
+  font-size: 14px; font-weight: 400;
+  color: var(--charcoal-mid);
+  line-height: 1.2;
+}
+/* Pointer / data labels — Montserrat 14px regular */
+.chart-pointer-label {
+  font-family: var(--f-chart);
+  font-size: 14px; font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+/* Source line (includes note as first line) — 10.5px regular */
+.chart-source {
+  font-family: var(--f-chart);
+  font-size: 10.5px; font-weight: 400;
+  color: var(--charcoal-light);
+  margin-top: var(--cs-2); /* 14px */
+  line-height: 1.6;
+}
+/* Credit line — 10px regular uppercase */
+.chart-credit {
+  font-family: var(--f-mono);
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--charcoal-light);
+  margin-top: var(--cs-1); /* 10px */
+  text-align: right;
+}
+
+/* ── BAR CHART ── */
+.bar-chart { display: flex; flex-direction: column; gap: 0; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: var(--cs-2); /* 14px */
+  margin-bottom: var(--cs-1); /* 10px */
+}
+.bar-label {
+  font-family: var(--f-chart);
+  font-size: 11px; font-weight: 400;
+  color: var(--charcoal-mid);
+  text-align: right;
+  line-height: 1.3;
+}
+.bar-track {
+  height: 28px;
+  background: var(--cream-2);
+  border-radius: 2px;
+  overflow: visible;
+  position: relative;
+  display: flex; align-items: center;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  position: relative;
+  display: flex; align-items: center;
+  transition: width 0.3s;
+}
+.bar-value {
+  font-family: var(--f-chart);
+  font-size: 11px; font-weight: 700;
+  color: var(--white);
+  position: absolute;
+  right: 8px;
+  white-space: nowrap;
+}
+.bar-value.outside {
+  color: var(--charcoal-mid);
+  right: auto;
+  left: calc(100% + 8px);
+}
+
+/* ── DONUT CHART (SVG) ── */
+.donut-wrap {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--cs-3); /* 28px */
+  align-items: center;
+}
+.donut-legend { display: flex; flex-direction: column; gap: var(--cs-2); /* 14px */ }
+.legend-item {
+  display: flex; align-items: flex-start; gap: var(--cs-1); /* 10px */
+}
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.legend-text {}
+.legend-value {
+  font-family: var(--f-chart);
+  font-size: 13px; font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.1; margin-bottom: 1px;
+}
+.legend-label {
+  font-family: var(--f-chart);
+  font-size: 11px; font-weight: 300;
+  color: var(--charcoal-mid); line-height: 1.3;
+}
+
+/* ── LINE CHART (SVG) ── */
+.line-chart-wrap { position: relative; }
+
+/* ── AXIS ── */
+.axis-line {
+  stroke: var(--cream-3);
+  stroke-width: 1;
+}
+.tick-line {
+  stroke: var(--cream-2);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.axis-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  fill: #8a9896;
+}
+.data-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 600;
+  fill: #2a2f2e;
+}
+
+/* ── SPACING ANNOTATIONS ── */
+.ann {
+  font-family: var(--f-mono);
+  font-size: 9px; font-weight: 500;
+  color: var(--coral);
+  letter-spacing: 0.06em;
+  display: flex; align-items: center; gap: 4px;
+  white-space: nowrap;
+}
+.ann::before { content: '←'; font-size: 10px; }
+
+/* ── DIVIDER ── */
+.section-divider {
+  height: 1px; background: var(--cream-2);
+  margin: 40px 0;
+}
+
+/* ── FONT SPEC BLOCK ── */
+.font-spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.font-spec-card {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--cream-2);
+}
+.font-spec-card.chart-font { }
+.fsc-role {
+  font-family: var(--f-chart);
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--charcoal-light); margin-bottom: 3px;
+}
+.fsc-name {
+  font-family: var(--f-display);
+  font-size: 16px; font-weight: 500;
+  color: var(--charcoal); margin-bottom: 0;
+}
+.fsc-name.chart { font-family: var(--f-chart); }
+.fsc-alphabet {
+  font-size: 12px; color: var(--charcoal-mid);
+  line-height: 1.5; margin-top: 6px;
+}
+.fsc-alphabet.chart { font-family: var(--f-chart); font-weight: 400; }
+.fsc-alphabet.display { font-family: var(--f-display); font-weight: 400; }
+.fsc-alphabet.mono { font-family: var(--f-mono); font-size: 11px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE TITLE -->
+<div class="page-title-block">
+  <div class="page-eyebrow">Personal Design System</div>
+  <div class="page-title">Visual Brand Identity &amp; Infographics Style</div>
+</div>
+
+<div style="height:1.5px; background:var(--cream-3); margin: 28px 0;"></div>
+
+<!-- ═══════ COLOUR PALETTE ═══════ -->
+<h2 class="section-heading" style="border-bottom:none; padding-bottom:0;">Color Palette</h2>
+
+<!-- Primary scale -->
+<div class="pal-row">
+  <div class="pal-row-label"><strong>Primary</strong> — Seafoam Green<br><span style="font-family:'Fira Code',monospace; font-size:9px; font-weight:400; color:var(--charcoal-light); letter-spacing:0.06em; text-transform:none;">Buttons · chart bars · success states</span></div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#d0f0e3;"></div>
+    <div class="pal-swatch" style="background:#a4dfc8;"></div>
+    <div class="pal-swatch" style="background:#4caf8a;"></div>
+    <div class="pal-swatch" style="background:#2d9e72;"></div>
+    <div class="pal-swatch" style="background:#1e845d;"></div>
+  </div>
+  <div class="pal-meta-grid">
+    <div class="pal-meta"><div class="pal-meta-name">200</div><div class="pal-meta-hex">#a4dfc8</div><div class="pal-meta-role">Tints, backgrounds</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">300</div><div class="pal-meta-hex">#70c9a8</div><div class="pal-meta-role">Disabled, borders</div></div>
+    <div class="pal-meta"><div class="pal-meta-name" style="color:var(--seafoam-500);">400 ★</div><div class="pal-meta-hex">#4caf8a</div><div class="pal-meta-role">Primary — chart bars</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">500</div><div class="pal-meta-hex">#2d9e72</div><div class="pal-meta-role">Hover, emphasis</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">600</div><div class="pal-meta-hex">#1e845d</div><div class="pal-meta-role">Active, pressed</div></div>
+  </div>
+</div>
+
+<!-- Secondary scale -->
+<div class="pal-row">
+  <div class="pal-row-label"><strong>Secondary</strong> — Steel Blue<br><span style="font-family:'Fira Code',monospace; font-size:9px; font-weight:400; color:var(--charcoal-light); letter-spacing:0.06em; text-transform:none;">Chart series 2 · links · UI borders</span></div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#d0e6f2;"></div>
+    <div class="pal-swatch" style="background:#9ec6de;"></div>
+    <div class="pal-swatch" style="background:#4a7fa5;"></div>
+    <div class="pal-swatch" style="background:#376690;"></div>
+    <div class="pal-swatch" style="background:#265078;"></div>
+  </div>
+  <div class="pal-meta-grid">
+    <div class="pal-meta"><div class="pal-meta-name">100</div><div class="pal-meta-hex">#d0e6f2</div><div class="pal-meta-role">Tints, backgrounds</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">200</div><div class="pal-meta-hex">#9ec6de</div><div class="pal-meta-role">Borders, dividers</div></div>
+    <div class="pal-meta"><div class="pal-meta-name" style="color:var(--steel-500);">400 ★</div><div class="pal-meta-hex">#4a7fa5</div><div class="pal-meta-role">Secondary — chart series 2</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">500</div><div class="pal-meta-hex">#376690</div><div class="pal-meta-role">Hover, emphasis</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">600</div><div class="pal-meta-hex">#265078</div><div class="pal-meta-role">Active, pressed</div></div>
+  </div>
+</div>
+
+<!-- Accent + neutral -->
+<div class="pal-row">
+  <div class="pal-row-label"><strong>Accent</strong> — Soft Coral &amp; <strong>Neutral</strong> — Cream / Charcoal<br><span style="font-family:'Fira Code',monospace; font-size:9px; font-weight:400; color:var(--charcoal-light); letter-spacing:0.06em; text-transform:none;">Coral: callouts · errors · highlights (use sparingly) · Neutrals: backgrounds · text · axes</span></div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#fef2ef;"></div>
+    <div class="pal-swatch" style="background:#f4b8aa;"></div>
+    <div class="pal-swatch" style="background:#e8735a;"></div>
+    <div class="pal-swatch" style="background:#f7f3ed;  outline: 1px solid #e2ddd5;"></div>
+    <div class="pal-swatch" style="background:#2a2f2e;"></div>
+  </div>
+  <div class="pal-meta-grid">
+    <div class="pal-meta"><div class="pal-meta-name">Coral 50</div><div class="pal-meta-hex">#fef2ef</div><div class="pal-meta-role">Error backgrounds</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">Coral 200</div><div class="pal-meta-hex">#f4b8aa</div><div class="pal-meta-role">Disabled accent</div></div>
+    <div class="pal-meta"><div class="pal-meta-name" style="color:var(--coral-500);">Coral 400 ★</div><div class="pal-meta-hex">#e8735a</div><div class="pal-meta-role">Accent — chart series 3</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">Cream</div><div class="pal-meta-hex">#f7f3ed</div><div class="pal-meta-role">Page backgrounds</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">Charcoal</div><div class="pal-meta-hex">#2a2f2e</div><div class="pal-meta-role">Body text, axes</div></div>
+  </div>
+</div>
+
+<!-- Optional fourth scale -->
+<div class="pal-row">
+  <div class="pal-row-label"><strong>Optional</strong> — Faded Lavender<br><span style="font-family:'Fira Code',monospace; font-size:9px; font-weight:400; color:var(--charcoal-light); letter-spacing:0.06em; text-transform:none;">Chart use only · sequential maps · third data series</span></div>
+  <div class="palette-grid">
+    <div class="pal-swatch" style="background:#e8e4fc;"></div>
+    <div class="pal-swatch" style="background:#d4cef8;"></div>
+    <div class="pal-swatch" style="background:#9d93e8;"></div>
+    <div class="pal-swatch" style="background:#7d72d4;"></div>
+    <div class="pal-swatch" style="background:#5e54b0;"></div>
+  </div>
+  <div class="pal-meta-grid">
+    <div class="pal-meta"><div class="pal-meta-name">100</div><div class="pal-meta-hex">#e8e4fc</div><div class="pal-meta-role">Tints, backgrounds</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">200</div><div class="pal-meta-hex">#d4cef8</div><div class="pal-meta-role">Borders, dividers</div></div>
+    <div class="pal-meta"><div class="pal-meta-name" style="color:var(--lavender-700);">400 ★</div><div class="pal-meta-hex">#9d93e8</div><div class="pal-meta-role">Sequential charts, maps</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">500</div><div class="pal-meta-hex">#7d72d4</div><div class="pal-meta-role">Hover, emphasis</div></div>
+    <div class="pal-meta"><div class="pal-meta-name">600</div><div class="pal-meta-hex">#5e54b0</div><div class="pal-meta-role">Active, pressed</div></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ═══════ FONTS ═══════ -->
+<h2 class="section-heading">Fonts</h2>
+
+<div class="font-spec-grid">
+  <div class="font-spec-card">
+    <div class="fsc-role">Display · Reports &amp; Documents</div>
+    <div class="fsc-name">Lora</div>
+    <div class="fsc-alphabet display">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+  </div>
+  <div class="font-spec-card">
+    <div class="fsc-role">Body · UI &amp; Web</div>
+    <div class="fsc-name" style="font-family:'Figtree',sans-serif;">Figtree</div>
+    <div class="fsc-alphabet" style="font-family:'Figtree',sans-serif;">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+  </div>
+  <div class="font-spec-card">
+    <div class="fsc-role">Code &amp; Data Labels</div>
+    <div class="fsc-name" style="font-family:'Fira Code',monospace;">Fira Code</div>
+    <div class="fsc-alphabet mono">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+  </div>
+</div>
+
+<table class="type-table" style="margin-bottom:40px;">
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Font</th>
+      <th>Specification</th>
+      <th>Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="type-role">Display / Heading</div></td>
+      <td><span style="font-family:'Lora',serif; font-size:14px; font-weight:500;">Lora</span></td>
+      <td><div class="type-spec">Reports, document titles, section headings<br>Weight 500–600 · Italic for emphasis</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--f-display</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Body / UI</div></td>
+      <td><span style="font-family:'Figtree',sans-serif; font-size:13px; font-weight:400;">Figtree</span></td>
+      <td><div class="type-spec">All UI text, body copy, buttons, labels, navigation<br>Weight 300–700</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--f-body</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Code &amp; Tokens</div></td>
+      <td><span style="font-family:'Fira Code',monospace; font-size:12px;">Fira Code</span></td>
+      <td><div class="type-spec">Hex values, token names, code snippets<br>Tabular figures · Weight 400–500</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--f-mono</div></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="subsection-heading">Charts &amp; Infographics</h3>
+
+<div class="font-spec-grid" style="margin-bottom:16px;">
+  <div class="font-spec-card chart-font">
+    <div class="fsc-name chart">Montserrat</div>
+    <div class="fsc-alphabet chart">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</div>
+  </div>
+</div>
+
+<!-- Chart typography spec table -->
+<table class="type-table">
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th>Font</th>
+      <th>Specification</th>
+      <th>Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="type-role">Chart Heading</div></td>
+      <td><span style="font-family:'Montserrat',sans-serif; font-size:15px; font-weight:600;">Montserrat Bold</span></td>
+      <td><div class="type-spec">20px · Weight 600 · Initial Capped<br>margin-bottom: 14px (cs-2)</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--f-chart<br>--type-chart-heading</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Subheading</div></td>
+      <td><span style="font-family:'Montserrat',sans-serif; font-size:13px; font-weight:400;">Montserrat Regular</span></td>
+      <td><div class="type-spec">16px · Weight 400<br>margin-bottom: 28px (cs-3)</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--type-chart-subhead</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Axis Labels</div></td>
+      <td><span style="font-family:'Montserrat',sans-serif; font-size:13px; font-weight:400;">Montserrat Regular</span></td>
+      <td><div class="type-spec">14px · Weight 400 · Color: charcoal-light<br>margin from axis: 14px (cs-2)</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--type-chart-label</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Graph Value Labels</div></td>
+      <td><span style="font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700;">Montserrat Bold</span></td>
+      <td><div class="type-spec">12px · Weight 700<br>margin: 10px (cs-1)</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--type-chart-label</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Note / Source Line</div></td>
+      <td><span style="font-family:'Montserrat',sans-serif; font-size:10.5px; font-weight:400;">Montserrat Regular</span></td>
+      <td><div class="type-spec">10.5px · Weight 400 · Color: charcoal-light<br>Note on line 1 · Source on line 2 · margin-top: 14px (cs-2)</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--type-chart-source</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Credit Line</div></td>
+      <td><span style="font-family:'Fira Code',monospace; font-size:12px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase;">Fira Code Regular</span></td>
+      <td><div class="type-spec">12px · Weight 400 · UPPERCASE · tracking 0.1em<br>margin-top: 10px (cs-1) · right-aligned</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--type-chart-credit</div></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="section-divider"></div>
+
+<!-- ═══════ INFOGRAPHICS STYLE ═══════ -->
+<h2 class="section-heading">Infographics Style</h2>
+
+<h3 class="subsection-heading">Spacing</h3>
+
+<style>
+  /* Shared chart body styles */
+  .sc  { display: flex; flex-direction: column; gap: 0; }
+  .sr  { display: grid; grid-template-columns: 100px 1fr; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .srl { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 400; color: var(--charcoal-mid); text-align: right; line-height: 1.3; }
+  .st  { height: 36px; display: flex; border-radius: 3px; overflow: hidden; }
+  .ss  { height: 100%; display: flex; align-items: center; justify-content: center; }
+  .ssl { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .sch { display: grid; grid-template-columns: 100px 1fr; gap: 12px; margin-bottom: 6px; }
+  .sci { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 400; text-align: center; line-height: 1.2; }
+
+  /* Annotation layout: chart on left, labels column on right */
+  .ann-layout {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 0;
+    max-width: 860px;
+    align-items: start;
+  }
+
+  /* Chart card */
+  .ann-chart {
+    background: var(--white);
+    border: 1px solid var(--cream-2);
+    border-radius: 4px;
+    padding: var(--cs-4);
+    position: relative;
+  }
+
+  /* Right column of annotations */
+  .ann-col {
+    padding-left: 0;
+    position: relative;
+  }
+
+  /* Each annotation row: horizontal tick line + label text */
+  .ann-item {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0; right: 0;
+  }
+
+  /* The tick line extending from chart edge to label */
+  .ann-tick {
+    width: 20px;
+    flex-shrink: 0;
+    border-top: 1px solid;
+  }
+
+  /* Label block */
+  .ann-text {
+    padding-left: 8px;
+  }
+  .ann-text-primary {
+    font-family: 'Figtree', sans-serif;
+    font-size: 11px; font-weight: 600;
+    line-height: 1.3;
+  }
+  .ann-text-secondary {
+    font-family: 'Figtree', sans-serif;
+    font-size: 10px; font-weight: 400;
+    color: var(--charcoal-light);
+    line-height: 1.3;
+    margin-top: 1px;
+  }
+
+  /* Spacing color: steel blue */
+  .ann-sp .ann-tick  { border-color: var(--charcoal-light); }
+  .ann-sp .ann-text-primary { color: var(--charcoal); }
+
+  /* Typography color: seafoam */
+  .ann-ty .ann-tick  { border-color: var(--charcoal-light); }
+  .ann-ty .ann-text-primary { color: var(--charcoal); }
+</style>
+
+<!-- SPACING CHART -->
+<div class="ann-layout" id="sp-layout">
+  <div class="ann-chart" id="sp-frame">
+    <div id="sp-h1" class="chart-heading">Lowest Income Renters Most Likely to be Cost Burdened</div>
+    <div id="sp-sh" class="chart-subhead">Share of renter households who are cost burdened, by income quartile</div>
+    <div id="sp-body">
+      <div class="sch">
+        <div></div>
+        <div style="display:flex;">
+          <div class="sci" style="width:62%; color:#1e845d; font-weight:700; font-size:12px;">Severely<br>burdened</div>
+          <div class="sci" style="width:28%; color:#2d9e72; font-weight:700; font-size:12px;">Moderately<br>burdened</div>
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sr">
+          <div class="srl" style="font-weight:600; color:var(--charcoal);">Bottom</div>
+          <div class="st">
+            <div class="ss" style="width:62%; background:#2d9e72;"><span class="ssl" style="color:#fff;">62%</span></div>
+            <div class="ss" style="width:28%; background:#70c9a8;"><span class="ssl" style="color:#fff;">28%</span></div>
+          </div>
+        </div>
+        <div class="sr">
+          <div class="srl">Second</div>
+          <div class="st">
+            <div class="ss" style="width:26%; background:#2d9e72;"><span class="ssl" style="color:#fff;">26%</span></div>
+            <div class="ss" style="width:34%; background:#70c9a8;"><span class="ssl" style="color:#fff;">34%</span></div>
+          </div>
+        </div>
+        <div class="sr">
+          <div class="srl">Third</div>
+          <div class="st">
+            <div class="ss" style="width:8%; background:#2d9e72;"><span class="ssl" style="color:#fff;">8%</span></div>
+            <div class="ss" style="width:14%; background:#70c9a8;"><span class="ssl" style="color:#fff;">14%</span></div>
+          </div>
+        </div>
+        <div class="sr" style="margin-bottom:0;">
+          <div class="srl">Top</div>
+          <div class="st">
+            <div class="ss" style="width:6%; background:#2d9e72;"><span class="ssl" style="color:#fff;">6%</span></div>
+            <div class="ss" style="width:10%; background:#70c9a8;"><span class="ssl" style="color:#fff;">10%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sp-src" class="chart-source">Note: Severely cost burdened = over 50% of income on rent. Moderately cost burdened = 30 to 50%.<br>Source: CBPP analysis of 2023 American Housing Survey data.</div>
+    <div style="height:1px; background:var(--charcoal-light); margin-top:var(--cs-1); opacity:0.4;"></div>
+    <div id="sp-crd" class="chart-credit">Center on Budget and Policy Priorities</div>
+  </div>
+
+  <!-- Spacing annotation column — populated by JS -->
+  <div class="ann-col" id="sp-ann-col"></div>
+</div>
+
+<div class="section-divider"></div>
+
+<h3 class="subsection-heading">Typography</h3>
+
+<!-- TYPOGRAPHY CHART -->
+<div class="ann-layout" id="ty-layout">
+  <div class="ann-chart" id="ty-frame">
+    <div id="ty-h1" class="chart-heading">Lowest Income Renters Most Likely to be Cost Burdened</div>
+    <div id="ty-sh" class="chart-subhead">Share of renter households who are cost burdened, by income quartile</div>
+    <div id="ty-body">
+      <div class="sch">
+        <div></div>
+        <div style="display:flex;">
+          <div class="sci" id="ty-cat" style="width:62%; color:#1e845d; font-weight:700; font-size:12px;">Severely<br>burdened</div>
+          <div class="sci" style="width:28%; color:#2d9e72; font-weight:700; font-size:12px;">Moderately<br>burdened</div>
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sr">
+          <div class="srl" id="ty-rowlbl" style="font-weight:600; color:var(--charcoal);">Bottom</div>
+          <div class="st">
+            <div class="ss" style="width:62%; background:#2d9e72;"><span class="ssl" id="ty-seglbl" style="color:#fff;">62%</span></div>
+            <div class="ss" style="width:28%; background:#70c9a8;"><span class="ssl" style="color:#fff;">28%</span></div>
+          </div>
+        </div>
+        <div class="sr">
+          <div class="srl">Second</div>
+          <div class="st">
+            <div class="ss" style="width:26%; background:#2d9e72;"><span class="ssl" id="ty-seglbl2" style="color:#fff;">26%</span></div>
+            <div class="ss" style="width:34%; background:#70c9a8;"><span class="ssl" style="color:#fff;">34%</span></div>
+          </div>
+        </div>
+        <div class="sr">
+          <div class="srl">Third</div>
+          <div class="st">
+            <div class="ss" style="width:8%; background:#2d9e72;"><span class="ssl" style="color:#fff;">8%</span></div>
+            <div class="ss" style="width:14%; background:#70c9a8;"><span class="ssl" style="color:#fff;">14%</span></div>
+          </div>
+        </div>
+        <div class="sr" style="margin-bottom:0;">
+          <div class="srl">Top</div>
+          <div class="st">
+            <div class="ss" style="width:6%; background:#2d9e72;"><span class="ssl" style="color:#fff;">6%</span></div>
+            <div class="ss" style="width:10%; background:#70c9a8;"><span class="ssl" style="color:#fff;">10%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="ty-src" class="chart-source">Note: Severely cost burdened = over 50% of income on rent. Moderately cost burdened = 30 to 50%.<br>Source: CBPP analysis of 2023 American Housing Survey data.</div>
+    <div style="height:1px; background:var(--charcoal-light); margin-top:var(--cs-1); opacity:0.4;"></div>
+    <div id="ty-crd" class="chart-credit">Center on Budget and Policy Priorities</div>
+  </div>
+
+  <!-- Typography annotation column — populated by JS -->
+  <div class="ann-col" id="ty-ann-col"></div>
+</div>
+
+<script>
+(function() {
+
+  const ROW_H = 34;
+
+  function midY(el, frameTop) {
+    const r = el.getBoundingClientRect();
+    return (r.top + r.bottom) / 2 - frameTop;
+  }
+  function botY(el, frameTop) {
+    return el.getBoundingClientRect().bottom - frameTop;
+  }
+  function topY(el, frameTop) {
+    return el.getBoundingClientRect().top - frameTop;
+  }
+
+  // ── SHARED DOT+CONNECTOR RENDERER ─────────────────────────────
+  function renderAnnotations(col, items, fTop) {
+    col.innerHTML = '';
+    items.forEach(item => {
+      const dY  = item.naturalY;
+      const lY  = item.labelY;
+      const gap = lY - dY;
+
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:absolute; left:0; right:0; top:0;';
+
+      // Dot at natural y
+      const dot = document.createElement('div');
+      dot.style.cssText = `position:absolute; top:${dY-2}px; left:0; width:5px; height:5px; border-radius:50%; background:var(--charcoal-light);`;
+
+      // Short horizontal tick — width matches so gap to text (left:33) is consistent
+      const h1 = document.createElement('div');
+      h1.style.cssText = `position:absolute; top:${dY}px; left:5px; width:${gap > 3 ? 12 : 24}px; height:1px; background:var(--charcoal-light);`;
+
+      wrap.appendChild(dot);
+      wrap.appendChild(h1);
+
+      if (gap > 3) {
+        const textStart = lY - 10;
+        const vertTop   = dY + (textStart - dY) / 2;
+        const vertH     = lY - vertTop;
+
+        const vert = document.createElement('div');
+        vert.style.cssText = `position:absolute; top:${vertTop}px; left:17px; width:1px; height:${vertH}px; background:var(--charcoal-light); opacity:0.35;`;
+        const h2 = document.createElement('div');
+        h2.style.cssText = `position:absolute; top:${lY}px; left:17px; width:12px; height:1px; background:var(--charcoal-light);`;
+        wrap.appendChild(vert);
+        wrap.appendChild(h2);
+      }
+
+      const indent = 33;
+      const textY  = lY - 10;
+      const text = document.createElement('div');
+      text.style.cssText = `position:absolute; top:${textY}px; left:${indent}px; right:0;`;
+      text.innerHTML = `
+        <div class="ann-text-primary">${item.primary}</div>
+        <div class="ann-text-secondary">${item.secondary}</div>
+      `;
+
+      wrap.appendChild(text);
+      col.appendChild(wrap);
+    });
+  }
+
+  function prepareItems(rawItems, ROW_H_local) {
+    // rawItems: [{naturalY, primary, secondary}]
+    rawItems.sort((a, b) => a.naturalY - b.naturalY);
+    rawItems.forEach(i => { i.labelY = i.naturalY; });
+    for (let i = 1; i < rawItems.length; i++) {
+      if (rawItems[i].labelY < rawItems[i-1].labelY + ROW_H_local) {
+        rawItems[i].labelY = rawItems[i-1].labelY + ROW_H_local;
+      }
+    }
+    return rawItems;
+  }
+
+  // ── BUILD SPACING ANNOTATIONS ──────────────────────────────────
+  function buildSpacing() {
+    const frame = document.getElementById('sp-frame');
+    const col   = document.getElementById('sp-ann-col');
+    if (!frame || !col) return;
+
+    const fTop = frame.getBoundingClientRect().top;
+    const fH   = frame.getBoundingClientRect().height;
+    col.style.cssText = `position:relative; height:${fH}px;`;
+
+    const raw = [
+      { naturalY: topY(document.getElementById('sp-h1'), fTop) / 2,
+        primary: '15 points', secondary: 'Outer padding' },
+      { naturalY: (botY(document.getElementById('sp-h1'), fTop) + topY(document.getElementById('sp-sh'), fTop)) / 2,
+        primary: '14 points', secondary: 'Heading → subheading' },
+      { naturalY: (botY(document.getElementById('sp-sh'), fTop) + topY(document.getElementById('sp-body'), fTop)) / 2,
+        primary: '28 points', secondary: 'Subheading → chart' },
+      { naturalY: (botY(document.getElementById('sp-body'), fTop) + topY(document.getElementById('sp-src'), fTop)) / 2,
+        primary: '14 points', secondary: 'Chart → note/source line' },
+      { naturalY: (botY(document.getElementById('sp-src'), fTop) + topY(document.getElementById('sp-crd'), fTop)) / 2,
+        primary: '10 points', secondary: 'Source → credit' },
+    ];
+
+    renderAnnotations(col, prepareItems(raw, 34), fTop);
+  }
+
+  // ── BUILD TYPOGRAPHY ANNOTATIONS ───────────────────────────────
+  function buildTypography() {
+    const frame = document.getElementById('ty-frame');
+    const col   = document.getElementById('ty-ann-col');
+    if (!frame || !col) return;
+
+    const fTop = frame.getBoundingClientRect().top;
+    const fH   = frame.getBoundingClientRect().height;
+    col.style.cssText = `position:relative; height:${fH}px;`;
+
+    const defs = [
+      { id: 'ty-h1',     primary: 'Heading',           secondary: 'Montserrat Bold, 20 pts., Initial Capped' },
+      { id: 'ty-sh',     primary: 'Subheading',         secondary: 'Montserrat Regular, 16 pts.' },
+      { id: 'ty-rowlbl', primary: 'Axis label',              secondary: 'Montserrat Regular, 14 pts.' },
+      { id: 'ty-seglbl2', primary: 'Graph value label', secondary: 'Montserrat Bold, 12 pts.' },
+      { id: 'ty-src',    primary: 'Note / Source line',       secondary: 'Montserrat Regular, 10.5 pts.' },
+      { id: 'ty-crd',    primary: 'Credit line',              secondary: 'Fira Code Regular, 12 pts., Uppercase' },
+    ];
+
+    const raw = defs.map(d => {
+      const el = document.getElementById(d.id);
+      if (!el) return null;
+      return { naturalY: midY(el, fTop), primary: d.primary, secondary: d.secondary };
+    }).filter(Boolean);
+
+    renderAnnotations(col, prepareItems(raw, 42), fTop);
+  }
+
+  function buildReport() {
+    const card = document.getElementById('rep-card');
+    const col  = document.getElementById('rep-ann-col');
+    if (!card || !col) return;
+
+    const cardH = card.getBoundingClientRect().height;
+
+    // Explicitly set positioning context on col
+    col.style.position = 'relative';
+    col.style.height   = cardH + 'px';
+    col.innerHTML = '';
+
+    // Use pageY (viewport-independent) for both card and col elements
+    const colPageTop = col.getBoundingClientRect().top + window.scrollY;
+
+    const defs = [
+      { id: 'rep-ey',    primary: 'Publication / Date', secondary: 'Fira Code Bold, 10 pts., Uppercase' },
+      { id: 'rep-eyorg', primary: 'Organization',        secondary: 'Fira Code Regular, 10 pts., Uppercase' },
+      { id: 'rep-h1',    primary: 'Heading',             secondary: 'Lora Bold, 24 pts.' },
+      { id: 'rep-h2',    primary: 'Subheading',          secondary: 'Figtree Medium, 16 pts.' },
+      { id: 'rep-au',    primary: 'Author',              secondary: 'Figtree Regular, 12 pts.' },
+      { id: 'rep-sect',    primary: 'Section header',      secondary: 'Figtree Bold, 13 pts.' },
+      { id: 'rep-body',    primary: 'Body text',           secondary: 'Figtree Regular, 12 pts.' },
+      { id: 'rep-endlbl',  primary: 'Endnotes label',      secondary: 'Fira Code Regular, 9 pts., Uppercase' },
+      { id: 'rep-en1',     primary: 'Endnote',             secondary: 'Figtree Regular, 10 pts.' },
+    ];
+
+    let items = defs.map(d => {
+      const el = document.getElementById(d.id);
+      if (!el) return null;
+      const r   = el.getBoundingClientRect();
+      const nat = (r.top + r.bottom) / 2 + window.scrollY - colPageTop;
+      return { naturalY: nat, labelY: nat, primary: d.primary, secondary: d.secondary };
+    }).filter(Boolean);
+
+    items.sort((a, b) => a.naturalY - b.naturalY);
+    for (let i = 1; i < items.length; i++) {
+      if (items[i].labelY < items[i-1].labelY + 28) {
+        items[i].labelY = items[i-1].labelY + 28;
+      }
+    }
+
+    renderAnnotations(col, items, 0);
+  }
+
+  function buildAll() {
+    buildSpacing();
+    buildTypography();
+    buildReport();
+  }
+
+  if (document.fonts) {
+    document.fonts.ready.then(() => setTimeout(buildAll, 300));
+  } else {
+    window.addEventListener('load', () => setTimeout(buildAll, 300));
+  }
+})();
+</script>
+
+<div class="section-divider"></div>
+
+<!-- SPACING REFERENCE TABLE -->
+<h2 class="section-heading">Chart Spacing Reference</h2>
+<table class="type-table">
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th>Value</th>
+      <th>Applied to</th>
+      <th>Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="type-role">Source / Credit</div></td>
+      <td><div class="type-spec">10px</div></td>
+      <td><div class="type-spec">Source → grey divider → credit · graph value label margin · legend item gap</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--cs-1</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Heading / Labels</div></td>
+      <td><div class="type-spec">14px</div></td>
+      <td><div class="type-spec">Heading → subheading · chart body → source line · axis label margin · bar row gap</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--cs-2</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Subheading</div></td>
+      <td><div class="type-spec">28px</div></td>
+      <td><div class="type-spec">Subheading → chart body</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--cs-3</div></td>
+    </tr>
+    <tr>
+      <td><div class="type-role">Outer Padding</div></td>
+      <td><div class="type-spec">15px</div></td>
+      <td><div class="type-spec">Chart outer padding — all four sides</div></td>
+      <td><div class="type-spec" style="font-family:'Fira Code',monospace; font-size:10px;">--cs-4</div></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="section-divider"></div>
+
+<!-- ═══════ REPORT STYLE ═══════ -->
+<h2 class="section-heading">Report Style</h2>
+
+<style>
+  .report-example {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 0;
+    max-width: 860px;
+    align-items: start;
+  }
+
+  /* Report header card */
+  .report-card {
+    background: var(--white);
+    border: 1px solid var(--cream-2);
+    border-radius: 4px;
+    padding: 19px 36px 32px;
+    position: relative;
+  }
+
+  /* Seafoam 300 accent bar at top — slightly wider */
+  .report-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 7px;
+    background: #70c9a8;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .report-eyebrow {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--seafoam);
+    margin-bottom: 4px;
+  }
+
+  .report-eyebrow-org {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--seafoam-500);
+    margin-bottom: 36px;
+  }
+
+  .report-h1 {
+    font-family: 'Lora', serif;
+    font-size: 24px; font-weight: 700;
+    line-height: 1.2; letter-spacing: -0.01em;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+
+  .report-h2 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 16px; font-weight: 500;
+    line-height: 1.4;
+    color: var(--charcoal-mid);
+    margin-bottom: 10px;
+  }
+
+  .report-author {
+    font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 400;
+    color: var(--charcoal-light);
+    margin-bottom: 12px;
+  }
+
+  .report-org {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--charcoal-light);
+    margin-bottom: 20px;
+  }
+
+  .report-rule {
+    height: 1px;
+    background: var(--cream-2);
+    margin-bottom: 12px;
+  }
+
+  .report-section-header {
+    font-family: 'Figtree', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--charcoal);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .report-body {
+    font-family: 'Figtree', sans-serif;
+    font-size: 12px; font-weight: 400;
+    color: var(--charcoal-mid);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 20px;
+  }
+
+  .report-endnotes-rule {
+    height: 1px;
+    background: var(--cream-3);
+    margin-bottom: 12px;
+    max-width: 200px;
+  }
+
+  .report-endnotes-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--charcoal-light);
+    margin-bottom: 8px;
+  }
+
+  .report-endnotes-list {
+    list-style: decimal;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .report-endnotes-list li {
+    font-family: 'Figtree', sans-serif;
+    font-size: 10px; font-weight: 400;
+    color: var(--charcoal-light);
+    line-height: 1.5;
+  }
+
+  .report-endnote-url {
+    font-family: 'Fira Code', monospace;
+    font-size: 9px;
+    color: var(--steel);
+  }
+
+  sup {
+    font-family: 'Figtree', sans-serif;
+    font-size: 8px;
+    color: var(--steel);
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  /* Report annotation column — mirrors chart annotation style */
+  .report-ann-col {
+    position: relative;
+    padding-left: 0;
+  }
+  .report-ann-item {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0; right: 0;
+  }
+  .report-ann-tick {
+    width: 20px; flex-shrink: 0;
+    border-top: 1px solid var(--charcoal-light);
+  }
+  .report-ann-text { padding-left: 8px; }
+  .report-ann-primary {
+    font-family: 'Figtree', sans-serif;
+    font-size: 11px; font-weight: 600;
+    color: var(--charcoal); line-height: 1.3;
+  }
+  .report-ann-secondary {
+    font-family: 'Figtree', sans-serif;
+    font-size: 10px; font-weight: 400;
+    color: var(--charcoal-light); line-height: 1.3; margin-top: 1px;
+  }
+</style>
+
+<div class="report-example" id="rep-example">
+  <div class="report-card" id="rep-card">
+    <p class="report-eyebrow"     id="rep-ey">Housing Policy Research · May 2026</p>
+    <p class="report-eyebrow-org" id="rep-eyorg">Center on Budget and Policy Priorities</p>
+    <h1 class="report-h1"    id="rep-h1">Funding Limitations Cause Large Unmet Need for Federal Rental Assistance</h1>
+    <h2 class="report-h2"    id="rep-h2">Only 1 in 4 eligible low-income households receive federal rental assistance — funding constraints, not eligibility rules, determine who gets help</h2>
+    <p class="report-author"  id="rep-au">By: Erik Gartland</p>
+    <div class="report-rule" id="rep-rule"></div>
+    <p class="report-section-header" id="rep-sect">Millions of eligible families remain on waitlists or receive no assistance due to chronic underfunding.</p>
+    <p class="report-body" id="rep-body">Federal rental assistance programs — including Housing Choice Vouchers and project-based Section 8 — reach only a fraction of the households that qualify.<sup>1</sup> Unlike entitlement programs such as Medicaid, rental assistance is funded through annual discretionary appropriations, creating a persistent gap between need and availability. Millions of eligible low-income families remain on waitlists for years or forgo assistance entirely, contributing to housing instability, overcrowding, and homelessness across the country.</p>
+
+    <!-- Endnotes -->
+    <div class="report-endnotes-rule" id="rep-endrule"></div>
+    <div class="report-endnotes" id="rep-endnotes">
+      <div class="report-endnotes-label" id="rep-endlbl">Endnotes</div>
+      <ol class="report-endnotes-list">
+        <li id="rep-en1">Erik Gartland, "Funding Limitations Create Widespread Unmet Need for Rental Assistance," Center on Budget and Policy Priorities, February 2022. <span class="report-endnote-url">cbpp.org/research/housing/funding-limitations-create-widespread-unmet-need-for-rental-assistance</span></li>
+      </ol>
+    </div>
+  </div>
+  <div class="report-ann-col" id="rep-ann-col"></div>
+</div>
+
+</body>
+</html>
