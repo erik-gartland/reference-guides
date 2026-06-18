@@ -13,6 +13,7 @@
   --cream:          #f7f3ed;
   --cream-2:        #ede8df;
   --cream-3:        #e2ddd5;
+  --grey-box:       #f0f0f2;
   --charcoal:       #2a2f2e;
   --charcoal-mid:   #4a5250;
   --charcoal-light: #8a9896;
@@ -59,9 +60,132 @@ body {
   font-family: var(--f-body);
   background: var(--white);
   color: var(--charcoal);
+  margin: 0;
+}
+
+.main {
   max-width: 960px;
-  margin: 0 auto;
-  padding: 56px 48px;
+  margin-left: 264px;
+  padding: 56px 56px 80px;
+}
+
+/* ── SIDEBAR (matches reference guides) ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 264px;
+  background: var(--charcoal);
+  border-right: 1px solid #1d2120;
+  overflow-y: auto;
+  padding: 28px 0;
+  z-index: 100;
+}
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #70c9a8;
+}
+.sidebar-logo {
+  padding: 4px 26px 22px;
+  border-bottom: 1px solid #3a403e;
+  margin-bottom: 18px;
+}
+.sidebar-logo .logo-text {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--seafoam);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.sidebar-logo .logo-sub {
+  font-family: var(--f-display);
+  font-size: 15px;
+  color: var(--white);
+  margin-top: 8px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.nav-section {
+  padding: 10px 26px 6px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7d8c89;
+  font-weight: 500;
+}
+.nav-link {
+  display: block;
+  padding: 7px 26px;
+  color: #b9c2c0;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+.nav-link:hover {
+  color: var(--white);
+  background: #353b39;
+  border-left-color: #70c9a8;
+}
+.nav-link.active {
+  color: var(--white);
+  border-left-color: #70c9a8;
+  background: #3a4240;
+  font-weight: 500;
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(42,47,46,0.4);
+  z-index: 150;
+}
+.sidebar-backdrop.open { display: block; }
+body.nav-open .menu-toggle { display: none !important; }
+  .menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 200;
+  background: var(--charcoal);
+  border: 1px solid #3a403e;
+  border-radius: 8px;
+  width: 42px; height: 42px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.menu-toggle span,
+.menu-toggle span::before,
+.menu-toggle span::after {
+  content: '';
+  display: block;
+  width: 18px; height: 2px;
+  background: var(--white);
+  position: relative;
+  transition: 0.2s;
+}
+.menu-toggle span::before { position: absolute; top: -6px; }
+.menu-toggle span::after { position: absolute; top: 6px; }
+
+@media (max-width: 980px) {
+  .menu-toggle { display: flex; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 40px rgba(42,47,46,0.12);
+  }
+  .sidebar.open { transform: translateX(0); z-index: 300; }
+  .main { margin-left: 0; padding: 72px 24px 56px; }
+}
+
+@media print {
+  .sidebar, .menu-toggle { display: none; }
 }
 
 /* ── PAGE TITLE ── */
@@ -83,7 +207,7 @@ body {
 }
 
 /* ── SECTION HEADING ── */
-.section-heading {
+.section-heading { scroll-margin-top: 24px;
   font-family: var(--f-display);
   font-size: 24px; font-weight: 600; font-style: normal;
   color: var(--charcoal);
@@ -393,7 +517,7 @@ body {
   margin-bottom: 32px;
 }
 .font-spec-card {
-  background: var(--cream);
+  background: var(--grey-box);
   border-radius: 8px;
   padding: 14px 16px;
   border: 1px solid var(--cream-2);
@@ -422,6 +546,24 @@ body {
 </head>
 <body>
 
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><span></span></button>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">Reference Guide</div>
+    <div class="logo-sub">Visual Brand Identity</div>
+  </div>
+  <div class="nav-section">Contents</div>
+  <a class="nav-link" href="#sec-palette">Color Palette</a>
+  <a class="nav-link" href="#sec-fonts">Fonts</a>
+  <a class="nav-link" href="#sec-infographics">Infographics Style</a>
+  <a class="nav-link" href="#sec-report">Report Style</a>
+</nav>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<main class="main">
+
 <!-- PAGE TITLE -->
 <div class="page-title-block">
   <div class="page-eyebrow">Personal Design System</div>
@@ -431,7 +573,7 @@ body {
 <div style="height:1.5px; background:var(--cream-3); margin: 28px 0;"></div>
 
 <!-- ═══════ COLOUR PALETTE ═══════ -->
-<h2 class="section-heading" style="border-bottom:none; padding-bottom:0;">Color Palette</h2>
+<h2 class="section-heading" id="sec-palette" style="border-bottom:none; padding-bottom:0;">Color Palette</h2>
 
 <!-- Primary scale -->
 <div class="pal-row">
@@ -512,7 +654,7 @@ body {
 <div class="section-divider"></div>
 
 <!-- ═══════ FONTS ═══════ -->
-<h2 class="section-heading">Fonts</h2>
+<h2 class="section-heading" id="sec-fonts">Fonts</h2>
 
 <div class="font-spec-grid">
   <div class="font-spec-card">
@@ -625,7 +767,7 @@ body {
 <div class="section-divider"></div>
 
 <!-- ═══════ INFOGRAPHICS STYLE ═══════ -->
-<h2 class="section-heading">Infographics Style</h2>
+<h2 class="section-heading" id="sec-infographics">Infographics Style</h2>
 
 <h3 class="subsection-heading">Spacing</h3>
 
@@ -1005,10 +1147,10 @@ body {
 })();
 </script>
 
-<div class="section-divider"></div>
+<div class="subsection-divider" style="height:1px; background:var(--cream-2); margin:36px 0;"></div>
 
 <!-- SPACING REFERENCE TABLE -->
-<h2 class="section-heading">Chart Spacing Reference</h2>
+<h3 class="subsection-heading" id="sec-spacing">Chart Spacing Reference</h3>
 <table class="type-table">
   <thead>
     <tr>
@@ -1049,7 +1191,7 @@ body {
 <div class="section-divider"></div>
 
 <!-- ═══════ REPORT STYLE ═══════ -->
-<h2 class="section-heading">Report Style</h2>
+<h2 class="section-heading" id="sec-report">Report Style</h2>
 
 <style>
   .report-example {
@@ -1243,6 +1385,45 @@ body {
   </div>
   <div class="report-ann-col" id="rep-ann-col"></div>
 </div>
+
+</main>
+
+<script>
+  // Scroll-spy active nav
+  const sections = document.querySelectorAll('.section-heading[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '0px 0px -75% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  if (menuToggle && sidebar) {
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const closeNav = () => {
+      sidebar.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      if (backdrop) backdrop.classList.remove('open');
+    };
+    menuToggle.addEventListener('click', () => {
+      const open = sidebar.classList.toggle('open');
+      document.body.classList.toggle('nav-open', open);
+      if (backdrop) backdrop.classList.toggle('open', open);
+    });
+    if (backdrop) backdrop.addEventListener('click', closeNav);
+    sidebar.querySelectorAll('.nav-link').forEach(link =>
+      link.addEventListener('click', closeNav)
+    );
+  }
+</script>
 
 </body>
 </html>
