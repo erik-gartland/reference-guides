@@ -83,13 +83,18 @@
     margin-bottom: 18px;
   }
   .sidebar-logo .logo-text {
+    display: inline-block;
     font-family: var(--f-mono);
     font-size: 11px;
     color: var(--seafoam);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s;
   }
+  .sidebar-logo .logo-text:hover { color: var(--seafoam-300); }
+  .sidebar-logo .back-arrow { font-size: 15px; vertical-align: -1px; }
   .sidebar-logo .logo-sub {
     font-family: var(--f-display);
     font-size: 15px;
@@ -471,7 +476,7 @@
 
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-text">Reference Guide</div>
+    <a class="logo-text" href="./index.html"><span class="back-arrow">←</span> Reference Guides</a>
     <div class="logo-sub">Ubuntu 26.04 LTS Setup</div>
   </div>
   <div class="nav-section">Sections</div>
@@ -1769,7 +1774,7 @@ Categories=Network;</code></pre>
         if (active) active.classList.add('active');
       }
     });
-  }, { threshold: 0.3 });
+  }, { rootMargin: '0px 0px -80% 0px', threshold: 0 });
 
   sections.forEach(s => observer.observe(s));
 
