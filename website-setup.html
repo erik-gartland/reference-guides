@@ -68,13 +68,18 @@
     margin-bottom: 18px;
   }
   .sidebar-logo .logo-text {
+    display: inline-block;
     font-family: var(--f-mono);
     font-size: 11px;
     color: var(--seafoam);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s;
   }
+  .sidebar-logo .logo-text:hover { color: var(--seafoam-300); }
+  .sidebar-logo .back-arrow { font-size: 15px; vertical-align: -1px; }
   .sidebar-logo .logo-sub {
     font-family: var(--f-display);
     font-size: 15px;
@@ -402,19 +407,19 @@
 
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-text">Reference Guide</div>
+    <a class="logo-text" href="./index.html"><span class="back-arrow">←</span> Reference Guides</a>
     <div class="logo-sub">Building a Personal Website</div>
   </div>
-  <div class="nav-section">Contents</div>
-  <a class="nav-link" href="#step-1"><span class="nav-num">1</span> Set up the GitHub repository</a>
-  <a class="nav-link" href="#step-2"><span class="nav-num">2</span> Enable GitHub Pages</a>
-  <a class="nav-link" href="#step-3"><span class="nav-num">3</span> Connect a custom domain</a>
-  <a class="nav-link" href="#step-4"><span class="nav-num">4</span> Remove .html from URLs</a>
-  <a class="nav-link" href="#step-5"><span class="nav-num">5</span> Build a design system</a>
-  <a class="nav-link" href="#step-6"><span class="nav-num">6</span> Make it mobile-friendly</a>
-  <a class="nav-link" href="#step-7"><span class="nav-num">7</span> Set up SEO</a>
-  <a class="nav-link" href="#step-8"><span class="nav-num">8</span> Add a favicon</a>
-  <a class="nav-link" href="#step-9"><span class="nav-num">9</span> Make ongoing edits</a>
+  <div class="nav-section">Sections</div>
+  <a class="nav-link" href="#repo-setup"><span class="nav-num">1</span> Set up the GitHub repository</a>
+  <a class="nav-link" href="#enable-pages"><span class="nav-num">2</span> Enable GitHub Pages</a>
+  <a class="nav-link" href="#custom-domain"><span class="nav-num">3</span> Connect a custom domain</a>
+  <a class="nav-link" href="#clean-urls"><span class="nav-num">4</span> Remove .html from URLs</a>
+  <a class="nav-link" href="#design-system"><span class="nav-num">5</span> Build a design system</a>
+  <a class="nav-link" href="#mobile"><span class="nav-num">6</span> Make it mobile-friendly</a>
+  <a class="nav-link" href="#seo"><span class="nav-num">7</span> Set up SEO</a>
+  <a class="nav-link" href="#favicon"><span class="nav-num">8</span> Add a favicon</a>
+  <a class="nav-link" href="#ongoing-edits"><span class="nav-num">9</span> Make ongoing edits</a>
 </nav>
 
 <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
@@ -427,7 +432,7 @@
     <p>A step-by-step record of how erikgartland.com was set up — from an empty repository to a mobile-friendly, search-indexed site on a custom domain.</p>
   </div>
 
-  <section class="step" id="step-1">
+  <section class="step" id="repo-setup">
     <div class="step-header">
       <span class="step-num">1</span>
       <h2 class="step-title">Set up the GitHub repository</h2>
@@ -446,7 +451,7 @@
     </div>
   </section>
 
-  <section class="step" id="step-2">
+  <section class="step" id="enable-pages">
     <div class="step-header">
       <span class="step-num">2</span>
       <h2 class="step-title">Enable GitHub Pages</h2>
@@ -463,7 +468,7 @@
     <p>From here on, every time you push a change to <code>main</code>, the live site rebuilds automatically.</p>
   </section>
 
-  <section class="step" id="step-3">
+  <section class="step" id="custom-domain">
     <div class="step-header">
       <span class="step-num">3</span>
       <h2 class="step-title">Connect a custom domain</h2>
@@ -490,7 +495,7 @@
     </div>
   </section>
 
-  <section class="step" id="step-4">
+  <section class="step" id="clean-urls">
     <div class="step-header">
       <span class="step-num">4</span>
       <h2 class="step-title">Remove .html from URLs</h2>
@@ -513,7 +518,7 @@ media/index.html      →  served at  /media/</code></pre>
     </div>
   </section>
 
-  <section class="step" id="step-5">
+  <section class="step" id="design-system">
     <div class="step-header">
       <span class="step-num">5</span>
       <h2 class="step-title">Build a design system</h2>
@@ -545,7 +550,7 @@ media/index.html      →  served at  /media/</code></pre>
     </div>
   </section>
 
-  <section class="step" id="step-6">
+  <section class="step" id="mobile">
     <div class="step-header">
       <span class="step-num">6</span>
       <h2 class="step-title">Make it mobile-friendly</h2>
@@ -578,7 +583,7 @@ media/index.html      →  served at  /media/</code></pre>
     </div>
   </section>
 
-  <section class="step" id="step-7">
+  <section class="step" id="seo">
     <div class="step-header">
       <span class="step-num">7</span>
       <h2 class="step-title">Set up SEO</h2>
@@ -613,7 +618,7 @@ if (redirects[path]) {
     </div>
   </section>
 
-  <section class="step" id="step-8">
+  <section class="step" id="favicon">
     <div class="step-header">
       <span class="step-num">8</span>
       <h2 class="step-title">Add a favicon</h2>
@@ -635,7 +640,7 @@ if (redirects[path]) {
     </div>
   </section>
 
-  <section class="step" id="step-9">
+  <section class="step" id="ongoing-edits">
     <div class="step-header">
       <span class="step-num">9</span>
       <h2 class="step-title">Make ongoing edits</h2>
@@ -702,7 +707,7 @@ if (redirects[path]) {
         if (active) active.classList.add('active');
       }
     });
-  }, { threshold: 0.3 });
+  }, { rootMargin: '0px 0px -80% 0px', threshold: 0 });
   steps.forEach(s => observer.observe(s));
 
   // Mobile menu toggle
