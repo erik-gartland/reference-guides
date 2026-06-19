@@ -20,6 +20,7 @@
   --white:          #ffffff;
 
   --seafoam:        #4caf8a;
+  --seafoam-300:    #70c9a8;
   --seafoam-500:    #2d9e72;
   --seafoam-600:    #1e845d;
   --seafoam-l:      #a4dfc8;
@@ -93,13 +94,18 @@ body {
   margin-bottom: 18px;
 }
 .sidebar-logo .logo-text {
+  display: inline-block;
   font-family: var(--f-mono);
   font-size: 11px;
   color: var(--seafoam);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
 }
+.sidebar-logo .logo-text:hover { color: var(--seafoam-300); }
+.sidebar-logo .back-arrow { font-size: 15px; vertical-align: -1px; }
 .sidebar-logo .logo-sub {
   font-family: var(--f-display);
   font-size: 15px;
@@ -550,10 +556,10 @@ body.nav-open .menu-toggle { display: none !important; }
 
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-text">Reference Guide</div>
+    <a class="logo-text" href="./index.html"><span class="back-arrow">←</span> Reference Guides</a>
     <div class="logo-sub">Visual Brand Identity</div>
   </div>
-  <div class="nav-section">Contents</div>
+  <div class="nav-section">Sections</div>
   <a class="nav-link" href="#sec-palette">Color Palette</a>
   <a class="nav-link" href="#sec-fonts">Fonts</a>
   <a class="nav-link" href="#sec-infographics">Infographics Style</a>
